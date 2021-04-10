@@ -62,34 +62,13 @@ public class LoginServlet extends HttpServlet {
         out.write("<head>");
         out.write("<link rel=\"stylesheet\" href=\"http://localhost:8080/crm/page/login/index.css\">");
         out.write("</head>");
-        out.write("<h1 style=\"color: blue; border: 1px solid black;\">登录成功</h1>");
+        out.write("<h2 style=\"color: blue; border: 1px solid black;\">登录成功</h2>");
         out.write("<ul>");
         out.write("<li>个人信息</li>");
         out.write("<li>修改密码</li>");
         out.write("<a href=\"http://localhost:8080/crm/page/login/index.html\">退出登录</a>");
         out.write("</ul>");
-        out.write("<h2>客户列表</h2>");
-        out.write("<table>");
-        out.write("<thead>");
-        out.write("<tr>");
-        out.write("<th>姓名</th>");
-        out.write("<th>电话</th>");
-        out.write("<th>性别</th>");
-        out.write("</tr>");
-        out.write("</thead>");
-        out.write("<tbody>");
-
-        List<Customer> customers = getCustomers();
-        for (Customer customer : customers) {
-            out.write("<tr>");
-            out.write("<td>" + customer.getName() + "</td>");
-            out.write("<td>" + customer.getAge() + "</td>");
-            out.write("<td>" + customer.getHeight() + "</td>");
-            out.write("</tr>");
-        }
-
-        out.write("</tbody>");
-        out.write("</table>");
+        out.write("<a href=\"http://localhost:8080/crm/page/list/index.jsp\">客户列表</a>");
         out.write("</body>");
         out.write("</html>");
     }
@@ -104,7 +83,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void faile(PrintWriter out) {
-        out.write("<h1 style=\"color: red; border: 1px solid black;\">登录失败</h1>");
+        out.write("<h2 style=\"color: red; border: 1px solid black;\">登录失败</h2>");
         out.write("<ul>");
         out.write("<a href=\"http://localhost:8080/crm/page/login/index.html\">重新登录</a>");
         out.write("</ul>");
