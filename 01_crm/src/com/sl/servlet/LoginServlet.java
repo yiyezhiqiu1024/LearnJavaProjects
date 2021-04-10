@@ -28,6 +28,40 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        _outHTML(request, response);
+    }
+
+    private void _outHTML(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 1.设置请求数据的编码
+        request.setCharacterEncoding("UTF-8");
+
+        // 2.获取请求参数
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        // 3.设置响应的内容类型（MIMEType + 数据编码)
+        response.setContentType("text/html;charset=UTF-8");
+
+        // 4.获取输出流
+        PrintWriter out = response.getWriter();
+
+        // 5.判断用户名、密码是否正确（假设规定用户名密码都是123，才代表正确）
+        if ("123".equals(username) && "123".equals(password)) {
+            out.write("<h1 style=\"color: blue; border: 1px solid black;\">登录成功</h1>");
+            out.write("<ul>");
+            out.write("<li>个人信息</li>");
+            out.write("<li>修改密码</li>");
+            out.write("<li>退出登录</li>");
+            out.write("</ul>");
+        } else {
+            out.write("<h1 style=\"color: red; border: 1px solid black;\">登录失败</h1>");
+            out.write("<ul>");
+            out.write("<li>重新登录</li>");
+            out.write("</ul>");
+        }
+    }
+
+    private void _outPlain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1.设置请求数据的编码
         request.setCharacterEncoding("UTF-8");
 
@@ -48,4 +82,6 @@ public class LoginServlet extends HttpServlet {
             out.write("登录失败");
         }
     }
+
+
 }
