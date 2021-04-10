@@ -32,84 +32,8 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        outHTML(request, response);
+        // 转发到 jsp 页面进行数据展示，用户请求的 URL 不会改变
+        request.getRequestDispatcher("/page/profile/index.jsp").forward(request, response);
     }
-
-    private void outHTML(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 1.设置请求数据的编码
-        request.setCharacterEncoding("UTF-8");
-
-        // 2.获取请求参数
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        // 3.设置响应的内容类型（MIMEType + 数据编码)
-        response.setContentType("text/html;charset=UTF-8");
-
-        // 4.获取输出流
-        PrintWriter out = response.getWriter();
-
-        // 5.判断用户名、密码是否正确（假设规定用户名密码都是123，才代表正确）
-        if ("123".equals(username) && "123".equals(password)) {
-            success(out);
-        } else {
-            faile(out);
-        }
-    }
-
-    private void success(PrintWriter out) {
-        out.write("<html>");
-        out.write("<head>");
-        out.write("<link rel=\"stylesheet\" href=\"http://localhost:8080/crm/page/login/index.css\">");
-        out.write("</head>");
-        out.write("<h2 style=\"color: blue; border: 1px solid black;\">登录成功</h2>");
-        out.write("<ul>");
-        out.write("<li>个人信息</li>");
-        out.write("<li>修改密码</li>");
-        out.write("<a href=\"http://localhost:8080/crm/page/login/index.html\">退出登录</a>");
-        out.write("</ul>");
-        out.write("<a href=\"http://localhost:8080/crm/page/list/index.jsp\">客户列表</a>");
-        out.write("</body>");
-        out.write("</html>");
-    }
-
-    private List<Customer> getCustomers() {
-        List<Customer> customers = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Customer customer = new Customer("张三" + i, 15 + i, 155.0 + i);
-            customers.add(customer);
-        }
-        return customers;
-    }
-
-    private void faile(PrintWriter out) {
-        out.write("<h2 style=\"color: red; border: 1px solid black;\">登录失败</h2>");
-        out.write("<ul>");
-        out.write("<a href=\"http://localhost:8080/crm/page/login/index.html\">重新登录</a>");
-        out.write("</ul>");
-    }
-
-    private void outPlain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 1.设置请求数据的编码
-        request.setCharacterEncoding("UTF-8");
-
-        // 2.获取请求参数
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        // 3.设置响应的内容类型（MIMEType + 数据编码)
-        response.setContentType("text/plain;charset=UTF-8");
-
-        // 4.获取输出流
-        PrintWriter out = response.getWriter();
-
-        // 5.判断用户名、密码是否正确（假设规定用户名密码都是123，才代表正确）
-        if ("123".equals(username) && "123".equals(password)) {
-            out.write("登录成功");
-        } else {
-            out.write("登录失败");
-        }
-    }
-
 
 }
