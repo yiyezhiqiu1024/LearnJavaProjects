@@ -51,12 +51,15 @@ public class LoginServlet extends HttpServlet {
             out.write("<ul>");
             out.write("<li>个人信息</li>");
             out.write("<li>修改密码</li>");
-            out.write("<li>退出登录</li>");
+            out.write("<a href=\"http://localhost:8080/crm/page/login/index.html\">退出登录</a>");
+            out.write("</ul>");
+            out.write("<ul>");
+            out.write("<li><a href=\"../list/index.jsp\">客户列表</a></li>");
             out.write("</ul>");
         } else {
             out.write("<h1 style=\"color: red; border: 1px solid black;\">登录失败</h1>");
             out.write("<ul>");
-            out.write("<li>重新登录</li>");
+            out.write("<a href=\"http://localhost:8080/crm/page/login/index.html\">重新登录</a>");
             out.write("</ul>");
         }
     }
