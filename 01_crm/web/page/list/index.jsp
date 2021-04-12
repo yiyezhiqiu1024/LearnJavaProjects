@@ -19,6 +19,7 @@
 </head>
 <body>
 
+<a href="http://localhost:8080/crm/page/add/index.html">添加</a>
 <table>
     <thead>
     <tr>
