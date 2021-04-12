@@ -76,7 +76,7 @@ public class CustomerServlet extends HttpServlet {
         // response.setStatus(302);
         // 响应头Location：/crm/list
         // response.setHeader("Location", "/crm/list");
-        response.sendRedirect("/crm/list");
+        response.sendRedirect("/crm/customer/list");
     }
 
 }
