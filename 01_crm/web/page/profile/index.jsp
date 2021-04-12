@@ -34,7 +34,7 @@
     <li>修改密码</li>
     <a href="http://localhost:8080/crm/page/login/index.html">退出登录</a>
 </ul>
-<a href="/crm/list">客户列表</a>
+<a href="/crm/customer/list">客户列表</a>
 <%
     } else {
 %>
