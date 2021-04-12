@@ -1,5 +1,8 @@
 package com.sl.util;
 
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+
+import javax.sql.DataSource;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,19 +13,13 @@ import java.util.List;
 import java.util.Properties;
 
 public class Dbs {
-    private static String url;
-    private static String username;
-    private static String password;
-    private static String driverClassName;
+    private static DataSource ds;
 
     static {
-        try (InputStream is = Dbs.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream is = Dbs.class.getClassLoader().getResourceAsStream("druid.properties")) {
             Properties properties = new Properties();
             properties.load(is);
-            url = properties.getProperty("url");
-            username = properties.getProperty("username");
-            password = properties.getProperty("password");
-            driverClassName = properties.getProperty("driverClassName");
+            ds = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,9 +30,9 @@ public class Dbs {
      */
     public static int update(String sql, Object ...args) {
         try {
-            Class.forName(driverClassName);
-            try (Connection conn = DriverManager.getConnection(url, username, password);
-                 PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            // 从 druid 连接池获取连接使用，不用手动管理关闭
+            Connection conn = ds.getConnection();
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 // 设置参数
                 for (int i = 0; i < args.length; i++) {
                     pstmt.setObject(i + 1, args[i]);
@@ -54,9 +51,9 @@ public class Dbs {
      */
     public static <T> List<T> query(String sql, RowMapper<T> mapper, Object ...args) {
         try {
-            Class.forName(driverClassName);
-            try (Connection conn = DriverManager.getConnection(url, username, password);
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // 从 druid 连接池获取连接使用，不用手动管理关闭
+            Connection conn = ds.getConnection();
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 // 设置参数
                 for (int i = 0; i < args.length; i++) {
                     pstmt.setObject(i + 1, args[i]);
