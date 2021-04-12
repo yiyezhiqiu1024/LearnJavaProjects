@@ -1,14 +1,25 @@
 package com.sl.bean;
 
 public class Customer {
+    private Integer id;
     private String name;
     private Integer age;
     private Double height;
+
+    public Customer() {}
 
     public Customer(String name, Integer age, Double height) {
         this.name = name;
         this.age = age;
         this.height = height;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,4 +45,6 @@ public class Customer {
     public void setHeight(Double height) {
         this.height = height;
     }
+
+
 }

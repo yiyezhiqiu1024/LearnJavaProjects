@@ -1,7 +1,7 @@
 package com.sl.servlet;
 
 import com.sl.bean.Customer;
-import com.sl.util.Datas;
+import com.sl.dao.CustomerDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/save")
 public class SaveServlet extends HttpServlet {
+
+    private final CustomerDao dao = new CustomerDao();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -28,7 +30,7 @@ public class SaveServlet extends HttpServlet {
 
         // 转成Java Bean对象
         Customer customer = new Customer(name, Integer.valueOf(age), Double.valueOf(height));
-        Datas.add(customer);
+        dao.save(customer);
 
         // 重定向
         // 状态码：302
