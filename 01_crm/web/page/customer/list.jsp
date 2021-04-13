@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<a href="http://localhost:8080/crm/page/customer/add.html">添加</a>
+<a href="/crm/page/customer/save.jsp">添加</a>
 <table>
     <thead>
     <tr>

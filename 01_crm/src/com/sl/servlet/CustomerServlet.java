@@ -49,17 +49,6 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 1.获取客户数据
-        List<Customer> customers = dao.list();
-
-        // 2.将客户数据存储到 request 中
-        request.setAttribute("customers", customers);
-
-        // 3.转发到 list.jsp 页面进行数据展示
-        request.getRequestDispatcher("/page/customer/list.jsp").forward(request, response);
-    }
-
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 获取请求参数
         Customer customer = new Customer();
@@ -72,14 +61,9 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    public void edit(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 获取请求参数
-        Integer id = Integer.valueOf(request.getParameter("id"));
-        Customer customer = dao.find(id);
-        request.setAttribute("customer", customer);
-        request.getRequestDispatcher("/page/customer/update.jsp").forward(request, response);
-    }
-
+    /**
+     * 更新 customer
+     */
     public void update(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 获取请求参数
         Customer customer = new Customer();
@@ -101,6 +85,26 @@ public class CustomerServlet extends HttpServlet {
         } else {
             forwardError(request, response, "删除客户信息失败");
         }
+    }
+
+    public void edit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 获取请求参数
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        Customer customer = dao.find(id);
+        request.setAttribute("customer", customer);
+        request.getRequestDispatcher("/page/customer/save.jsp").forward(request, response);
+
+    }
+
+    public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 1.获取客户数据
+        List<Customer> customers = dao.list();
+
+        // 2.将客户数据存储到 request 中
+        request.setAttribute("customers", customers);
+
+        // 3.转发到 list.jsp 页面进行数据展示
+        request.getRequestDispatcher("/page/customer/list.jsp").forward(request, response);
     }
 
     private void forwardError(HttpServletRequest request, HttpServletResponse response, String error) throws ServletException, IOException {
