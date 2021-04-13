@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<a href="http://localhost:8080/crm/page/add/index.html">添加</a>
+<a href="http://localhost:8080/crm/page/customer/add.html">添加</a>
 <table>
     <thead>
     <tr>
@@ -35,6 +35,8 @@
             <td>${customer.name}</td>
             <td>${customer.age}</td>
             <td>${customer.height}</td>
+            <td><a href="/crm/customer/edit?id=${customer.id}">编辑</a></td>
+            <td><a href="/crm/customer/remove?id=${customer.id}">删除</a></td>
         </tr>
     </c:forEach>
 

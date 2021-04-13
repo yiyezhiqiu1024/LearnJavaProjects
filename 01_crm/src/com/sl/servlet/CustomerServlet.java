@@ -2,6 +2,7 @@ package com.sl.servlet;
 
 import com.sl.bean.Customer;
 import com.sl.dao.CustomerDao;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,6 +35,7 @@ public class CustomerServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         try {
             // 利用方法名调用方法
             String uri = request.getRequestURI();
@@ -43,9 +45,7 @@ public class CustomerServlet extends HttpServlet {
             method.invoke(this, request, response);
         } catch (Exception e) {
             e.printStackTrace();
-
-            request.setAttribute("error", "访问路径有问题");
-            request.getRequestDispatcher("/page/error.jsp").forward(request, response);
+            forwardError(request, response, "访问路径有问题");
         }
     }
 
@@ -57,26 +57,57 @@ public class CustomerServlet extends HttpServlet {
         request.setAttribute("customers", customers);
 
         // 3.转发到 list.jsp 页面进行数据展示
-        request.getRequestDispatcher("/page/list/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/page/customer/list.jsp").forward(request, response);
     }
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.setCharacterEncoding("UTF-8");
         // 获取请求参数
-        String name = request.getParameter("name");
-        String age = request.getParameter("age");
-        String height = request.getParameter("height");
+        Customer customer = new Customer();
+        BeanUtils.populate(customer, request.getParameterMap());
 
-        // 转成Java Bean对象
-        Customer customer = new Customer(name, Integer.valueOf(age), Double.valueOf(height));
-        dao.save(customer);
-
-        // 重定向
-        // 状态码：302
-        // response.setStatus(302);
-        // 响应头Location：/crm/list
-        // response.setHeader("Location", "/crm/list");
-        response.sendRedirect("/crm/customer/list");
+        if ( dao.save(customer)) {
+            response.sendRedirect("/crm/customer/list");
+        } else {
+            forwardError(request, response, "保存客户信息失败");
+        }
     }
+
+    public void edit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 获取请求参数
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        Customer customer = dao.find(id);
+        request.setAttribute("customer", customer);
+        request.getRequestDispatcher("/page/customer/update.jsp").forward(request, response);
+    }
+
+    public void update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 获取请求参数
+        Customer customer = new Customer();
+        BeanUtils.populate(customer, request.getParameterMap());
+
+        if (dao.update(customer)) {
+            response.sendRedirect("/crm/customer/list");
+        } else {
+            forwardError(request, response, "更新客户信息失败");
+        }
+    }
+
+    public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 获取请求参数
+        Integer id = Integer.valueOf(request.getParameter("id"));
+
+        if (dao.remove(id)) {
+            response.sendRedirect("/crm/customer/list");
+        } else {
+            forwardError(request, response, "删除客户信息失败");
+        }
+    }
+
+    private void forwardError(HttpServletRequest request, HttpServletResponse response, String error) throws ServletException, IOException {
+        request.setAttribute("error", error);
+        request.getRequestDispatcher("/page/error.jsp").forward(request, response);
+    }
+
+
 
 }
