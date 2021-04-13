@@ -26,24 +26,24 @@ public class CustomerDao {
     }
 
     /**
-     * 将 customer 保存到数据库
+     * 将 customer 保存\更新到数据库
      */
     public boolean save(Customer customer) {
-        String sql = "INSERT INTO customer(name, age, height) VALUES (?, ?, ?)";
-        List<Object> args = buildArgs(customer);
-        Object[] array = args.toArray();
-        return Dbs.getTpl().update(sql, array) > 0;
-    }
+        List<Object> args = new ArrayList<>();
+        args.add(customer.getName());
+        args.add(customer.getAge());
+        args.add(customer.getHeight());
 
-    /**
-     * 更新 customer
-     */
-    public boolean update(Customer customer) {
-        String sql = "UPDATE customer SET name = ?, age = ?, height = ? WHERE id = ?";
-        List<Object> args = buildArgs(customer);
-        args.add(customer.getId());
-        Object[] array = args.toArray();
-        return Dbs.getTpl().update(sql, array) > 0;
+        Integer id = customer.getId();
+        String sql;
+        if (id == null || id < 1) { // 保存
+            sql = "INSERT INTO customer(name, age, height) VALUES (?, ?, ?)";
+        } else { // 更新
+            sql = "UPDATE customer SET name = ?, age = ?, height = ? WHERE id = ?";
+            args.add(id);
+        }
+
+        return Dbs.getTpl().update(sql, args.toArray()) > 0;
     }
 
     /**
@@ -54,11 +54,4 @@ public class CustomerDao {
         return Dbs.getTpl().update(sql, id) > 0;
     }
 
-    private List<Object> buildArgs(Customer customer) {
-        List<Object> args = new ArrayList<>();
-        args.add(customer.getName());
-        args.add(customer.getAge());
-        args.add(customer.getHeight());
-        return args;
-    }
 }

@@ -16,14 +16,7 @@
 </head>
 <body>
 
-<form
-    <c:choose>
-        <c:when test="${empty customer}">action="/crm/customer/save"</c:when>
-        <c:otherwise>action="/crm/customer/update"</c:otherwise>
-    </c:choose>
-        method="post">
-
-
+<form action="/crm/customer/save" method="post">
     <c:if test="${not empty customer}">
         <%-- 隐藏域 --%>
         <input type="hidden" name="id" value="${customer.id}"/>

@@ -49,9 +49,6 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    /**
-     * 保存 customer
-     */
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 获取请求参数
         Customer customer = new Customer();
@@ -61,21 +58,6 @@ public class CustomerServlet extends HttpServlet {
             response.sendRedirect("/crm/customer/list");
         } else {
             forwardError(request, response, "保存客户信息失败");
-        }
-    }
-
-    /**
-     * 更新 customer
-     */
-    public void update(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 获取请求参数
-        Customer customer = new Customer();
-        BeanUtils.populate(customer, request.getParameterMap());
-
-        if (dao.update(customer)) {
-            response.sendRedirect("/crm/customer/list");
-        } else {
-            forwardError(request, response, "更新客户信息失败");
         }
     }
 
