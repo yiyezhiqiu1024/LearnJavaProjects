@@ -49,6 +49,9 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
+    /**
+     * 保存 customer
+     */
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 获取请求参数
         Customer customer = new Customer();
