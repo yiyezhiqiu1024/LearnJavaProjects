@@ -30,7 +30,16 @@ public class EducationServlet extends BaseServlet {
         if (dao.save(education)) {
             response.sendRedirect( request.getContextPath()+ "/education/admin");
         } else {
-            forwardError(request, response, "保存网站信息失败");
+            forwardError(request, response, "保存教育经验失败");
+        }
+    }
+
+    public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        if (dao.remove(id)) {
+            response.sendRedirect( request.getContextPath()+ "/education/admin");
+        } else {
+            forwardError(request, response, "删除教育经验失败");
         }
     }
 

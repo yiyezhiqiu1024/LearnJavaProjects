@@ -72,7 +72,7 @@
                                                     <span>编辑</span>
                                                 </button>
                                                 <button type="button" class="btn bg-pink waves-effect btn-xs"
-                                                        onclick="remove('XX大学')">
+                                                        onclick="remove('${education.id}', '${education.name}')">
                                                     <i class="material-icons">delete</i>
                                                     <span>删除</span>
                                                 </button>
@@ -194,7 +194,7 @@
             $('#add-form-box').modal()
         }
 
-        function remove(name) {
+        function remove(id, name) {
             swal({
                 title: "你确定？",
                 text: '你确定要删除【' + name + '】？',
@@ -206,13 +206,14 @@
                 }
             }).then(willDelete => {
                 if (!willDelete) return
-                swal({
-                    title: '删除成功',
-                    text: '【' + name + '】已经被删除！',
-                    icon: 'success',
-                    timer: 1500,
-                    buttons: false
-                })
+                location.href = '${ctx}/education/remove?id=' + id;
+                // swal({
+                //     title: '删除成功',
+                //     text: '【' + name + '】已经被删除！',
+                //     icon: 'success',
+                //     timer: 1500,
+                //     buttons: false
+                // })
             })
         }
 

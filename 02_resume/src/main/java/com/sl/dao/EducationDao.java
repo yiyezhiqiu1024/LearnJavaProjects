@@ -33,4 +33,9 @@ public class EducationDao {
 
         return Dbs.getTpl().update(sql, args.toArray()) > 0;
     }
+
+    public boolean remove(Integer id) {
+        String sql = "DELETE FROM education WHERE id = ?";
+        return Dbs.getTpl().update(sql, id) > 0;
+    }
 }
