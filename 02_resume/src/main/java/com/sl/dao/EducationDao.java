@@ -34,8 +34,16 @@ public class EducationDao {
         return Dbs.getTpl().update(sql, args.toArray()) > 0;
     }
 
-    public boolean remove(Integer id) {
-        String sql = "DELETE FROM education WHERE id = ?";
-        return Dbs.getTpl().update(sql, id) > 0;
+    public boolean remove(List<Integer> ids) {
+        List<Object> args = new ArrayList<>();
+        StringBuilder sql = new StringBuilder();
+        sql.append("DELETE FROM education").append(" WHERE id in (");
+        for (Integer id : ids) {
+            args.add(id);
+            sql.append("?, ");
+        }
+        sql.replace(sql.length() - 2, sql.length(), ")");
+        // DELETE FROM education WHERE id in (?, ?, ?)
+        return Dbs.getTpl().update(sql.toString(), args.toArray()) > 0;
     }
 }

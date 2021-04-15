@@ -52,33 +52,34 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    <c:forEach items="${educations}" var="education">
-                                        <tr>
-                                            <td>
-                                                <div class="switch">
-                                                    <label><input type="checkbox"><span class="lever switch-col-blue"></span></label>
-                                                </div>
-                                            </td>
-                                            <td>${education.name}</td>
-                                            <td><fmt:formatDate pattern="yyyy-MM-dd" value="${education.beginDay}" /></td>
-                                            <td><fmt:formatDate pattern="yyyy-MM-dd" value="${education.endDay}" /></td>
-                                            <td>${education.typeString}</td>
-                                            <td>${education.intro}</td>
-                                            <td>
-                                                <button type="button" class="btn bg-blue waves-effect btn-xs"
-                                                        onclick="edit()">
-                                                    <i class="material-icons">edit</i>
-                                                    <span>编辑</span>
-                                                </button>
-                                                <button type="button" class="btn bg-pink waves-effect btn-xs"
-                                                        onclick="remove('${education.id}', '${education.name}')">
-                                                    <i class="material-icons">delete</i>
-                                                    <span>删除</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                    <form id="remove-form" action="${ctx}/education/remove" method="post">
+                                        <c:forEach items="${educations}" var="education">
+                                            <tr>
+                                                <td>
+                                                    <div class="switch">
+                                                        <label><input type="checkbox" name="id" value="${education.id}"><span class="lever switch-col-blue"></span></label>
+                                                    </div>
+                                                </td>
+                                                <td>${education.name}</td>
+                                                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${education.beginDay}" /></td>
+                                                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${education.endDay}" /></td>
+                                                <td>${education.typeString}</td>
+                                                <td>${education.intro}</td>
+                                                <td>
+                                                    <button type="button" class="btn bg-blue waves-effect btn-xs"
+                                                            onclick="edit()">
+                                                        <i class="material-icons">edit</i>
+                                                        <span>编辑</span>
+                                                    </button>
+                                                    <button type="button" class="btn bg-pink waves-effect btn-xs"
+                                                            onclick="remove('${education.id}', '${education.name}')">
+                                                        <i class="material-icons">delete</i>
+                                                        <span>删除</span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </form>
                                     </tbody>
                                 </table>
                             </c:if>
@@ -229,13 +230,9 @@
                 }
             }).then(willDelete => {
                 if (!willDelete) return
-                swal({
-                    title: "删除成功",
-                    text: "被选中的记录已经被删除！",
-                    icon: "success",
-                    timer: 1500,
-                    buttons: false
-                })
+
+                // 拿到表单，发送请求
+                $('#remove-form').submit()
             })
         }
 

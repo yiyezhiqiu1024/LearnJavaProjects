@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/education/*")
@@ -35,8 +36,12 @@ public class EducationServlet extends BaseServlet {
     }
 
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Integer id = Integer.valueOf(request.getParameter("id"));
-        if (dao.remove(id)) {
+        String[] idStrs = request.getParameterValues("id");
+        List<Integer> ids = new ArrayList<>();
+        for (String idStr : idStrs) {
+            ids.add(Integer.valueOf(idStr));
+        }
+        if (dao.remove(ids)) {
             response.sendRedirect( request.getContextPath()+ "/education/admin");
         } else {
             forwardError(request, response, "删除教育经验失败");
