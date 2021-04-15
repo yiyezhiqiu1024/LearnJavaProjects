@@ -1,17 +1,20 @@
-﻿<!DOCTYPE html>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% request.setAttribute("ctx", request.getContextPath()); %>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>小码哥简历管理-网站信息</title>
-    <link rel="icon" href="../../asset/admin/img/favicon.png" type="image/x-icon">
-    <link href="../../asset/plugin/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet">
-    <link href="../../asset/plugin/node-waves/waves.css" rel="stylesheet">
-    <link href="../../asset/plugin/animate-css/animate.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/material-icons.css" rel="stylesheet">
-    <link href="../../asset/admin/css/style.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/theme-blue.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/main.css" rel="stylesheet">
+    <title>一叶之秋简历管理-网站信息</title>
+    <link rel="icon" href="${ctx}/asset/admin/img/favicon.png" type="image/x-icon">
+    <link href="${ctx}/asset/plugin/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="${ctx}/asset/plugin/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet">
+    <link href="${ctx}/asset/plugin/node-waves/waves.css" rel="stylesheet">
+    <link href="${ctx}/asset/plugin/animate-css/animate.min.css" rel="stylesheet">
+    <link href="${ctx}/asset/admin/css/material-icons.css" rel="stylesheet">
+    <link href="${ctx}/asset/admin/css/style.min.css" rel="stylesheet">
+    <link href="${ctx}/asset/admin/css/theme-blue.min.css" rel="stylesheet">
+    <link href="${ctx}/asset/admin/css/main.css" rel="stylesheet">
 </head>
 
 <body class="theme-blue">
@@ -54,7 +57,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="../../asset/admin/img/avatar.png" alt="User">
+                    <img src="${ctx}/asset/admin/img/avatar.png" alt="User">
                 </div>
                 <div class="info-container">
                     <div class="name">M了个J</div>
@@ -128,7 +131,7 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a href="website.html">
+                        <a href="${ctx}/website/admin">
                             <i class="material-icons">language</i>
                             <span>网站信息</span>
                         </a>
@@ -149,7 +152,8 @@
                             <h2>网站信息</h2>
                         </div>
                         <div class="body">
-                            <form class="form-validation" method="post">
+                            <form class="form-validation" method="post" action="${ctx}/website/save">
+                                <input type="hidden" name="id" value="${website.id}"/>
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
                                         <label for="footer">底部</label>
@@ -160,7 +164,7 @@
                                                 <textarea name="footer" maxlength="1000"
                                                           id="footer" cols="30" rows="5"
                                                           class="form-control no-resize"
-                                                          placeholder="底部"></textarea>
+                                                          placeholder="底部">${website.footer}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -179,18 +183,18 @@
         </div>
     </section>
 
-    <script src="../../asset/plugin/jquery/jquery.min.js"></script>
-    <script src="../../asset/plugin/bootstrap/bootstrap.min.js"></script>
-    <script src="../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.js"></script>
-    <script src="../../asset/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-    <script src="../../asset/plugin/node-waves/waves.js"></script>
-    <script src="../../asset/plugin/jquery-validation/jquery.validate.js"></script>
-    <script src="../../asset/plugin/jquery-validation/messages_zh.js"></script>
-    <script src="../../asset/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="${ctx}/asset/plugin/jquery/jquery.min.js"></script>
+    <script src="${ctx}/asset/plugin/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx}/asset/plugin/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    <script src="${ctx}/asset/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="${ctx}/asset/plugin/node-waves/waves.js"></script>
+    <script src="${ctx}/asset/plugin/jquery-validation/jquery.validate.js"></script>
+    <script src="${ctx}/asset/plugin/jquery-validation/messages_zh.js"></script>
+    <script src="${ctx}/asset/plugin/sweetalert/sweetalert.min.js"></script>
 
     <!-- Custom Js -->
-    <script src="../../asset/admin/js/default.js"></script>
-    <script src="../../asset/admin/js/main.js"></script>
+    <script src="${ctx}/asset/admin/js/default.js"></script>
+    <script src="${ctx}/asset/admin/js/main.js"></script>
 </body>
 
 </html>
