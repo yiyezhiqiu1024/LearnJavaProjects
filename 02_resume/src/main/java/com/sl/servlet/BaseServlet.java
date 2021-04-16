@@ -53,6 +53,6 @@ public class BaseServlet extends HttpServlet {
 
     protected void forwardError(HttpServletRequest request, HttpServletResponse response, String error) throws ServletException, IOException {
         request.setAttribute("error", error);
-        request.getRequestDispatcher("/page/error.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/page/error.jsp").forward(request, response);
     }
 }

@@ -2,16 +2,16 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>小码哥简历管理-留言信息</title>
-    <link rel="icon" href="../../asset/admin/img/favicon.png" type="image/x-icon">
-    <link href="../../asset/plugin/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet">
-    <link href="../../asset/plugin/node-waves/waves.css" rel="stylesheet">
-    <link href="../../asset/plugin/animate-css/animate.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/material-icons.css" rel="stylesheet">
-    <link href="../../asset/admin/css/style.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/theme-blue.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/main.css" rel="stylesheet">
+    <title>小码哥简历管理-工作经验</title>
+    <link rel="icon" href="../../../asset/admin/img/favicon.png" type="image/x-icon">
+    <link href="../../../asset/plugin/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet">
+    <link href="../../../asset/plugin/node-waves/waves.css" rel="stylesheet">
+    <link href="../../../asset/plugin/animate-css/animate.min.css" rel="stylesheet">
+    <link href="../../../asset/admin/css/material-icons.css" rel="stylesheet">
+    <link href="../../../asset/admin/css/style.min.css" rel="stylesheet">
+    <link href="../../../asset/admin/css/theme-blue.min.css" rel="stylesheet">
+    <link href="../../../asset/admin/css/main.css" rel="stylesheet">
 </head>
 
 <body class="theme-blue">
@@ -54,7 +54,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="../../asset/admin/img/avatar.png" alt="User">
+                    <img src="../../../asset/admin/img/avatar.png" alt="User">
                 </div>
                 <div class="info-container">
                     <div class="name">M了个J</div>
@@ -103,7 +103,7 @@
                             <span>公司信息</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="experience.html">
                             <i class="material-icons">work</i>
                             <span>工作经验</span>
@@ -121,7 +121,7 @@
                             <span>获奖成就</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="contact.html">
                             <i class="material-icons">comment</i>
                             <span>留言信息</span>
@@ -146,41 +146,39 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>留言信息</h2>
+                            <h2>工作经验</h2>
                         </div>
                         <div class="body table-responsive">
                             <div class="menus">
-                                <div class="search-box input-group">
-                                    <select name="subjectId">
-                                        <option value="2">全部</option>
-                                        <option value="1">已读</option>
-                                        <option value="0">未读</option>
-                                    </select>
-                                    <div class="form-line input">
-                                        <input type="date" name="beginDay" class="form-control" placeholder="开始日期">
-                                    </div>
-                                    <div class="form-line input">
-                                        <input type="date" name="endDay" class="form-control" placeholder="结束日期">
-                                    </div>
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">search</i>
-                                    </span>
-                                    <div class="form-line keyword">
-                                        <input type="text" class="form-control" placeholder="主题、内容等">
-                                    </div>
-                                    <button type="submit" class="btn bg-blue waves-effect btn-sm">搜索</button>
+                                <div class="buttons">
+                                    <button type="button" class="btn bg-blue waves-effect btn-sm"
+                                            data-toggle="modal" data-target="#add-form-box">
+                                        <i class="material-icons">add</i>
+                                        <span>添加</span>
+                                    </button>
+                                    <button type="button"
+                                            class="btn bg-pink waves-effect btn-sm removeAll disabled"
+                                            disabled
+                                            onclick="removeAll()">
+                                        <i class="material-icons">delete</i>
+                                        <span>删除选中</span>
+                                    </button>
                                 </div>
                             </div>
 
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                 <tr>
-                                    <th>已读</th>
-                                    <th>名称</th>
-                                    <th>邮箱</th>
-                                    <th>日期</th>
-                                    <th>主题</th>
-                                    <th>内容</th>
+                                    <th>
+                                        <div class="switch">
+                                            <label><input type="checkbox"><span class="lever switch-col-blue"></span></label>
+                                        </div>
+                                    </th>
+                                    <th>职位</th>
+                                    <th>公司</th>
+                                    <th>开始</th>
+                                    <th>结束</th>
+                                    <th>简介</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -188,95 +186,77 @@
                                 <tr>
                                     <td>
                                         <div class="switch">
-                                            <label><input type="checkbox" disabled><span class="lever switch-col-blue"></span></label>
+                                            <label><input type="checkbox"><span class="lever switch-col-blue"></span></label>
                                         </div>
                                     </td>
-                                    <td>XX</td>
-                                    <td>123@qq.com</td>
+                                    <td>CTO</td>
+                                    <td><a href="#" target="_blank">XX公司</a></td>
+                                    <td>2011-09-09</td>
                                     <td>2014-08-08</td>
-                                    <td>XX</td>
-                                    <td>XXXXX</td>
+                                    <td>XXX</td>
                                     <td>
                                         <button type="button" class="btn bg-blue waves-effect btn-xs"
-                                                onclick="view()">
+                                                onclick="edit()">
                                             <i class="material-icons">edit</i>
-                                            <span>查看</span>
+                                            <span>编辑</span>
+                                        </button>
+                                        <button type="button" class="btn bg-pink waves-effect btn-xs"
+                                                onclick="remove('XX公司')">
+                                            <i class="material-icons">delete</i>
+                                            <span>删除</span>
                                         </button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="switch">
-                                            <label><input type="checkbox" disabled><span class="lever switch-col-blue"></span></label>
+                                            <label><input type="checkbox"><span class="lever switch-col-blue"></span></label>
                                         </div>
                                     </td>
-                                    <td>XX</td>
-                                    <td>123@qq.com</td>
+                                    <td>CTO</td>
+                                    <td><a href="#" target="_blank">XX公司</a></td>
+                                    <td>2011-09-09</td>
                                     <td>2014-08-08</td>
-                                    <td>XX</td>
-                                    <td>XXXXX</td>
+                                    <td>XXX</td>
                                     <td>
                                         <button type="button" class="btn bg-blue waves-effect btn-xs"
-                                                onclick="view()">
+                                                onclick="edit()">
                                             <i class="material-icons">edit</i>
-                                            <span>查看</span>
+                                            <span>编辑</span>
+                                        </button>
+                                        <button type="button" class="btn bg-pink waves-effect btn-xs"
+                                                onclick="remove('XX公司')">
+                                            <i class="material-icons">delete</i>
+                                            <span>删除</span>
                                         </button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="switch">
-                                            <label><input type="checkbox" disabled><span class="lever switch-col-blue"></span></label>
+                                            <label><input type="checkbox"><span class="lever switch-col-blue"></span></label>
                                         </div>
                                     </td>
-                                    <td>XX</td>
-                                    <td>123@qq.com</td>
+                                    <td>CTO</td>
+                                    <td><a href="#" target="_blank">XX公司</a></td>
+                                    <td>2011-09-09</td>
                                     <td>2014-08-08</td>
-                                    <td>XX</td>
-                                    <td>XXXXX</td>
+                                    <td>XXX</td>
                                     <td>
                                         <button type="button" class="btn bg-blue waves-effect btn-xs"
-                                                onclick="view()">
+                                                onclick="edit()">
                                             <i class="material-icons">edit</i>
-                                            <span>查看</span>
+                                            <span>编辑</span>
+                                        </button>
+                                        <button type="button" class="btn bg-pink waves-effect btn-xs"
+                                                onclick="remove('XX公司')">
+                                            <i class="material-icons">delete</i>
+                                            <span>删除</span>
                                         </button>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-
-                            <div class="page-box">
-                                <div class="page-size">
-                                    共100条10页，每页
-                                    <select name="pageSize">
-                                        <option value="10">10</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
-                                        <option value="40">40</option>
-                                        <option value="50">50</option>
-                                    </select>
-                                    条
-                                </div>
-                                <nav>
-                                    <ul class="pagination">
-                                        <li class="disabled">
-                                            <a>
-                                                <i class="material-icons">chevron_left</i>
-                                            </a>
-                                        </li>
-                                        <li class="active"><a>1</a></li>
-                                        <li><a href="javascript:void(0);" class="waves-effect">2</a></li>
-                                        <li><a href="javascript:void(0);" class="waves-effect">3</a></li>
-                                        <li><a href="javascript:void(0);" class="waves-effect">4</a></li>
-                                        <li><a href="javascript:void(0);" class="waves-effect">5</a></li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="waves-effect">
-                                                <i class="material-icons">chevron_right</i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -285,82 +265,76 @@
     </section>
 
     <!--  add-form-box  -->
-    <div class="modal fade" id="view-form-box" style="display: none;">
+    <div class="modal fade" id="add-form-box" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">查看留言</h4>
+                    <h4 class="modal-title">添加工作</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form class="form-validation" method="post">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
-                                <label for="name">名称</label>
+                                <label>公司</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
+                                <div class="form-group">
+                                    <select name="company">
+                                        <option value="1">阿里巴巴</option>
+                                        <option value="2">腾讯</option>
+                                        <option value="3">字节跳动</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
+                                <label for="job">职位</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="name" name="name" maxlength="20" class="form-control"
-                                               placeholder="名称"
-                                               disabled>
+                                        <input type="text" id="job" name="job" maxlength="20" class="form-control"
+                                               placeholder="职位"
+                                               required>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
-                                <label for="email">邮箱</label>
+                                <label for="beginDay">开始</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="email" id="email" name="email" maxlength="50" class="form-control"
-                                               placeholder="邮箱"
-                                               disabled>
+                                        <input type="date" id="beginDay" name="beginDay" class="form-control"
+                                               required>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
-                                <label for="createdTime">时间</label>
+                                <label for="endDay">结束</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="createdTime" name="createdTime" class="form-control"
-                                               placeholder="时间"
-                                               disabled>
+                                        <input type="date" id="endDay" name="endDay" class="form-control"
+                                               required>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
-                                <label for="subject">主题</label>
+                                <label for="intro">简介</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="subject" name="subject" class="form-control"
-                                               placeholder="主题" maxlength="20"
-                                               disabled>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
-                                <label for="comment">内容</label>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <textarea name="comment" id="comment"
-                                                  maxlength="1000"
-                                                  cols="30" rows="5" class="form-control no-resize"
-                                                  placeholder="内容" disabled></textarea>
+                                        <textarea name="intro" maxlength="1000" id="intro" cols="30" rows="5" class="form-control no-resize" placeholder="简介"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -368,6 +342,7 @@
 
                         <div class="row">
                             <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
+                                <button class="btn btn-primary waves-effect m-l-15" type="submit">保存</button>
                                 <button class="btn btn-info waves-effect m-l-15" data-dismiss="modal">关闭</button>
                             </div>
                         </div>
@@ -377,29 +352,100 @@
         </div>
     </div>
 
-    <script src="../../asset/plugin/jquery/jquery.min.js"></script>
-    <script src="../../asset/plugin/bootstrap/bootstrap.min.js"></script>
-    <script src="../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.js"></script>
-    <script src="../../asset/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-    <script src="../../asset/plugin/node-waves/waves.js"></script>
-    <script src="../../asset/plugin/jquery-validation/jquery.validate.js"></script>
-    <script src="../../asset/plugin/jquery-validation/messages_zh.js"></script>
-    <script src="../asset/plugin/jquery-inputmask/jquery.inputmask.bundle.js"></script>
-    <script src="../../asset/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="../../../asset/plugin/jquery/jquery.min.js"></script>
+    <script src="../../../asset/plugin/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    <script src="../../../asset/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="../../../asset/plugin/node-waves/waves.js"></script>
+    <script src="../../../asset/plugin/jquery-validation/jquery.validate.js"></script>
+    <script src="../../../asset/plugin/jquery-validation/messages_zh.js"></script>
+    <script src="../../../asset/plugin/sweetalert/sweetalert.min.js"></script>
 
     <!-- Custom Js -->
-    <script src="../../asset/admin/js/default.js"></script>
-    <script src="../../asset/admin/js/main.js"></script>
+    <script src="../../../asset/admin/js/default.js"></script>
+    <script src="../../../asset/admin/js/main.js"></script>
     <script>
         addValidatorRules('.form-validation')
 
-        $('.search-box .input input').inputmask('yyyy/mm/dd', {
-            placeholder: '____/__/__'
+        function edit() {
+            $('#add-form-box').modal()
+        }
+
+        function remove(name) {
+            swal({
+                title: "你确定？",
+                text: '你确定要删除【' + name + '】？',
+                icon: 'warning',
+                dangerMode: true,
+                buttons: {
+                    cancel: '取消',
+                    confirm: '确定'
+                }
+            }).then(willDelete => {
+                if (!willDelete) return
+                swal({
+                    title: '删除成功',
+                    text: '【' + name + '】已经被删除！',
+                    icon: 'success',
+                    timer: 1500,
+                    buttons: false
+                })
+            })
+        }
+
+        function removeAll() {
+            swal({
+                title: "你确定？",
+                text: "你确定要删除所有选中的记录？",
+                icon: "warning",
+                dangerMode: true,
+                buttons: {
+                    cancel: "取消",
+                    confirm: "确定"
+                }
+            }).then(willDelete => {
+                if (!willDelete) return
+                swal({
+                    title: "删除成功",
+                    text: "被选中的记录已经被删除！",
+                    icon: "success",
+                    timer: 1500,
+                    buttons: false
+                })
+            })
+        }
+
+        const $set = $(".table tbody tr input[type=checkbox]")
+        const $removeAll = $('.table-responsive .removeAll')
+        $('.table thead th input[type=checkbox]').change(function () {
+            let checked = $(this).is(":checked")
+            if (checked) {
+                $set.each(function () {
+                    $(this).prop("checked", true)
+                    $(this).parents('tr').addClass("active")
+                })
+                $removeAll.removeClass('disabled')
+                $removeAll.prop('disabled', false)
+            } else {
+                $set.each(function () {
+                    $(this).prop("checked", false)
+                    $(this).parents('tr').removeClass("active")
+                })
+                $removeAll.addClass('disabled')
+                $removeAll.prop('disabled', true)
+            }
         })
 
-        function view() {
-            $('#view-form-box').modal()
-        }
+        $set.change(function () {
+            $(this).parents('tr').toggleClass("active")
+            if ($('.table tbody tr input[type=checkbox]:checked').length > 0) {
+                $removeAll.removeClass('disabled')
+                $removeAll.prop('disabled', false)
+            } else {
+                $removeAll.addClass('disabled')
+                $removeAll.prop('disabled', true)
+            }
+        })
     </script>
 </body>
 

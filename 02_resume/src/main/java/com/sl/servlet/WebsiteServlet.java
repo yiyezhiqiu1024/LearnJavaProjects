@@ -17,7 +17,7 @@ public class WebsiteServlet extends BaseServlet {
         List<Website> websites = dao.list();
         Website website = (websites != null && !websites.isEmpty()) ? websites.get(0) : null;
         request.setAttribute("website", website);
-        request.getRequestDispatcher("/page/admin/website.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/page/admin/website.jsp").forward(request, response);
     }
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {

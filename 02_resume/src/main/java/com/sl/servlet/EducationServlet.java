@@ -18,7 +18,7 @@ public class EducationServlet extends BaseServlet {
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Education> educations = dao.list();
         request.setAttribute("educations", educations);
-        request.getRequestDispatcher("/page/admin/education.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/page/admin/education.jsp").forward(request, response);
     }
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {

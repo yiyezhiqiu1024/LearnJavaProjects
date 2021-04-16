@@ -2,16 +2,16 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>小码哥简历管理-专业技能</title>
-    <link rel="icon" href="../../asset/admin/img/favicon.png" type="image/x-icon">
-    <link href="../../asset/plugin/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet">
-    <link href="../../asset/plugin/node-waves/waves.css" rel="stylesheet">
-    <link href="../../asset/plugin/animate-css/animate.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/material-icons.css" rel="stylesheet">
-    <link href="../../asset/admin/css/style.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/theme-blue.min.css" rel="stylesheet">
-    <link href="../../asset/admin/css/main.css" rel="stylesheet">
+    <title>小码哥简历管理-获奖成就</title>
+    <link rel="icon" href="../../../asset/admin/img/favicon.png" type="image/x-icon">
+    <link href="../../../asset/plugin/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet">
+    <link href="../../../asset/plugin/node-waves/waves.css" rel="stylesheet">
+    <link href="../../../asset/plugin/animate-css/animate.min.css" rel="stylesheet">
+    <link href="../../../asset/admin/css/material-icons.css" rel="stylesheet">
+    <link href="../../../asset/admin/css/style.min.css" rel="stylesheet">
+    <link href="../../../asset/admin/css/theme-blue.min.css" rel="stylesheet">
+    <link href="../../../asset/admin/css/main.css" rel="stylesheet">
 </head>
 
 <body class="theme-blue">
@@ -54,7 +54,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="../../asset/admin/img/avatar.png" alt="User">
+                    <img src="../../../asset/admin/img/avatar.png" alt="User">
                 </div>
                 <div class="info-container">
                     <div class="name">M了个J</div>
@@ -79,7 +79,7 @@
                             <span>个人信息</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="skill.html">
                             <i class="material-icons">accessibility</i>
                             <span>专业技能</span>
@@ -115,7 +115,7 @@
                             <span>项目经验</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="award.html">
                             <i class="material-icons">plus_one</i>
                             <span>获奖成就</span>
@@ -146,7 +146,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>专业技能</h2>
+                            <h2>获奖成就</h2>
                         </div>
                         <div class="body table-responsive">
                             <div class="menus">
@@ -175,7 +175,8 @@
                                         </div>
                                     </th>
                                     <th>名称</th>
-                                    <th>级别</th>
+                                    <th>图片</th>
+                                    <th>简介</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -186,8 +187,9 @@
                                             <label><input type="checkbox"><span class="lever switch-col-blue"></span></label>
                                         </div>
                                     </td>
-                                    <td>数据库</td>
-                                    <td>精通</td>
+                                    <td>XX奖</td>
+                                    <td>xx</td>
+                                    <td>xxxx</td>
                                     <td>
                                         <button type="button" class="btn bg-blue waves-effect btn-xs"
                                                 onclick="edit()">
@@ -195,7 +197,7 @@
                                             <span>编辑</span>
                                         </button>
                                         <button type="button" class="btn bg-pink waves-effect btn-xs"
-                                                onclick="remove('数据库')">
+                                                onclick="remove('XX奖')">
                                             <i class="material-icons">delete</i>
                                             <span>删除</span>
                                         </button>
@@ -207,8 +209,9 @@
                                             <label><input type="checkbox"><span class="lever switch-col-blue"></span></label>
                                         </div>
                                     </td>
-                                    <td>数据库</td>
-                                    <td>精通</td>
+                                    <td>XX奖</td>
+                                    <td>xx</td>
+                                    <td>xxxx</td>
                                     <td>
                                         <button type="button" class="btn bg-blue waves-effect btn-xs"
                                                 onclick="edit()">
@@ -216,7 +219,7 @@
                                             <span>编辑</span>
                                         </button>
                                         <button type="button" class="btn bg-pink waves-effect btn-xs"
-                                                onclick="remove('数据库')">
+                                                onclick="remove('XX奖')">
                                             <i class="material-icons">delete</i>
                                             <span>删除</span>
                                         </button>
@@ -228,8 +231,9 @@
                                             <label><input type="checkbox"><span class="lever switch-col-blue"></span></label>
                                         </div>
                                     </td>
-                                    <td>数据库</td>
-                                    <td>精通</td>
+                                    <td>XX奖</td>
+                                    <td>xx</td>
+                                    <td>xxxx</td>
                                     <td>
                                         <button type="button" class="btn bg-blue waves-effect btn-xs"
                                                 onclick="edit()">
@@ -237,7 +241,7 @@
                                             <span>编辑</span>
                                         </button>
                                         <button type="button" class="btn bg-pink waves-effect btn-xs"
-                                                onclick="remove('数据库')">
+                                                onclick="remove('XX奖')">
                                             <i class="material-icons">delete</i>
                                             <span>删除</span>
                                         </button>
@@ -257,10 +261,27 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">添加专业技能</h4>
+                    <h4 class="modal-title">添加获奖成就</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-validation" method="post">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
+                                <label>图片</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
+                                <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail">
+                                            <img src="../../../asset/admin/img/noimage.png" alt="">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <i class="material-icons clear fileinput-exists" data-dismiss="fileinput">close</i>
+                                        <input type="file" name="image" accept="image/*">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
                                 <label for="name">名称</label>
@@ -277,19 +298,17 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
-                                <label>级别</label>
+                                <label for="intro">简介</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
                                 <div class="form-group">
-                                    <select name="level">
-                                        <option value="0">了解</option>
-                                        <option value="1">熟悉</option>
-                                        <option value="2">掌握</option>
-                                        <option value="3">精通</option>
-                                    </select>
+                                    <div class="form-line">
+                                        <textarea name="intro" maxlength="1000" id="intro" cols="30" rows="5" class="form-control no-resize" placeholder="简介"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
                                 <button class="btn btn-primary waves-effect m-l-15" type="submit">保存</button>
@@ -302,18 +321,18 @@
         </div>
     </div>
 
-    <script src="../../asset/plugin/jquery/jquery.min.js"></script>
-    <script src="../../asset/plugin/bootstrap/bootstrap.min.js"></script>
-    <script src="../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.js"></script>
-    <script src="../../asset/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-    <script src="../../asset/plugin/node-waves/waves.js"></script>
-    <script src="../../asset/plugin/jquery-validation/jquery.validate.js"></script>
-    <script src="../../asset/plugin/jquery-validation/messages_zh.js"></script>
-    <script src="../../asset/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="../../../asset/plugin/jquery/jquery.min.js"></script>
+    <script src="../../../asset/plugin/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../asset/plugin/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    <script src="../../../asset/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="../../../asset/plugin/node-waves/waves.js"></script>
+    <script src="../../../asset/plugin/jquery-validation/jquery.validate.js"></script>
+    <script src="../../../asset/plugin/jquery-validation/messages_zh.js"></script>
+    <script src="../../../asset/plugin/sweetalert/sweetalert.min.js"></script>
 
     <!-- Custom Js -->
-    <script src="../../asset/admin/js/default.js"></script>
-    <script src="../../asset/admin/js/main.js"></script>
+    <script src="../../../asset/admin/js/default.js"></script>
+    <script src="../../../asset/admin/js/main.js"></script>
     <script>
         addValidatorRules('.form-validation')
 

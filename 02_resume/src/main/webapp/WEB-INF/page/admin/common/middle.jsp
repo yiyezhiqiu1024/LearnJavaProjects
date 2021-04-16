@@ -47,9 +47,9 @@
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="../front/user.html"><i class="material-icons">person</i>个人信息</a></li>
+                        <li><a href="../../front/user.html"><i class="material-icons">person</i>个人信息</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="../login.html"><i class="material-icons">input</i>退出登录</a></li>
+                        <li><a href="../../login.html"><i class="material-icons">input</i>退出登录</a></li>
                     </ul>
                 </div>
             </div>
@@ -59,19 +59,19 @@
         <div class="menu">
             <ul class="list">
                 <li>
-                    <a href="user.html">
+                    <a href="../user.html">
                         <i class="material-icons">person</i>
                         <span>个人信息</span>
                     </a>
                 </li>
                 <li>
-                    <a href="skill.html">
+                    <a href="../skill.html">
                         <i class="material-icons">accessibility</i>
                         <span>专业技能</span>
                     </a>
                 </li>
                 <li>
-                    <a href="password.html">
+                    <a href="../password.html">
                         <i class="material-icons">lock</i>
                         <span>修改密码</span>
                     </a>
@@ -83,31 +83,31 @@
                     </a>
                 </li>
                 <li>
-                    <a href="company.html">
+                    <a href="../company.html">
                         <i class="material-icons">domain</i>
                         <span>公司信息</span>
                     </a>
                 </li>
                 <li>
-                    <a href="experience.html">
+                    <a href="../experience.html">
                         <i class="material-icons">work</i>
                         <span>工作经验</span>
                     </a>
                 </li>
                 <li>
-                    <a href="project.html">
+                    <a href="../project.html">
                         <i class="material-icons">build</i>
                         <span>项目经验</span>
                     </a>
                 </li>
                 <li>
-                    <a href="award.html">
+                    <a href="../award.html">
                         <i class="material-icons">plus_one</i>
                         <span>获奖成就</span>
                     </a>
                 </li>
                 <li>
-                    <a href="contact.html">
+                    <a href="../contact.html">
                         <i class="material-icons">comment</i>
                         <span>留言信息</span>
                     </a>
