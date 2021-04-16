@@ -3,11 +3,11 @@
 <html lang="zh">
 <head>
     <title>一叶之秋简历管理-教育信息</title>
-    <%@include file="common/head.jsp"%>
+    <%@ include file="common/head.jsp" %>
 </head>
 
 <body class="theme-blue">
-    <%@include file="common/middle.jsp"%>
+    <%@ include file="common/middle.jsp" %>
 
     <section class="content">
         <div class="container-fluid">
@@ -21,7 +21,7 @@
                             <div class="menus">
                                 <div class="buttons">
                                     <button type="button" class="btn bg-blue waves-effect btn-sm"
-                                            data-toggle="modal" data-target="#add-form-box">
+                                            onclick="add()">
                                         <i class="material-icons">add</i>
                                         <span>添加</span>
                                     </button>
@@ -47,7 +47,6 @@
                                         <th>开始</th>
                                         <th>结束</th>
                                         <th>类型</th>
-                                        <th>简介</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -64,10 +63,9 @@
                                                 <td><fmt:formatDate pattern="yyyy-MM-dd" value="${education.beginDay}" /></td>
                                                 <td><fmt:formatDate pattern="yyyy-MM-dd" value="${education.endDay}" /></td>
                                                 <td>${education.typeString}</td>
-                                                <td>${education.intro}</td>
                                                 <td>
                                                     <button type="button" class="btn bg-blue waves-effect btn-xs"
-                                                            onclick="edit()">
+                                                            onclick="edit(${education.json})">
                                                         <i class="material-icons">edit</i>
                                                         <span>编辑</span>
                                                     </button>
@@ -95,10 +93,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">添加教育</h4>
+                    <h4 class="modal-title">添加教育信息</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-validation" method="post" action="${ctx}/education/save">
+                        <input style="display: none;" type="text" name="id">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
                                 <label for="name">名称</label>
@@ -184,15 +183,33 @@
         </div>
     </div>
 
-    <%@include file="common/foot.jsp"%>
+    <%@ include file="common/foot.jsp" %>
 
     <script>
         addValidatorRules('.form-validation')
 
         $('.menu .list .education').addClass('active')
 
-        function edit() {
-            $('#add-form-box').modal()
+        const $addFormBox = $('#add-form-box')
+        const $addForm = $addFormBox.find('form')
+
+        function add() {
+            $addFormBox.modal()
+            // 重置表单的内容
+            $addForm[0].reset()
+            // 原生的form对象有一个reset方法
+            // document.getElement...、document.query...获取的是原生的DOM对象
+            // $()获取的是jQuery包装过的对象，并不是原生的DOM对象
+        }
+
+        function edit(json) {
+            add()
+
+            // 填充表单
+            for (const k in json) {
+                console.log(k + "=" + json[k]);
+                $addForm.find('[name=' + k + ']').val(json[k])
+            }
         }
 
         function remove(id, name) {

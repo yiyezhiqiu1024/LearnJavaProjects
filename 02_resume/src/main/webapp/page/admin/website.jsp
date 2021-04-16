@@ -2,12 +2,12 @@
 <html lang="zh">
 <head>
     <title>一叶之秋简历管理-网站信息</title>
-    <%@include file="common/head.jsp"%>
+    <%@ include file="common/head.jsp" %>
 </head>
 
 <body class="theme-blue">
 
-    <%@include file="common/middle.jsp"%>
+    <%@ include file="common/middle.jsp" %>
 
     <section class="content">
         <div class="container-fluid">
@@ -49,7 +49,7 @@
         </div>
     </section>
 
-    <%@include file="common/foot.jsp"%>
+    <%@ include file="common/foot.jsp" %>
 
     <script>
         $('.menu .list .website').addClass('active')

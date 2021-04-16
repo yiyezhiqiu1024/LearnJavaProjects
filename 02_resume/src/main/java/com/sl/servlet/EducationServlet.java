@@ -2,6 +2,7 @@ package com.sl.servlet;
 
 import com.sl.bean.Education;
 import com.sl.dao.EducationDao;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +23,7 @@ public class EducationServlet extends BaseServlet {
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Education education = new Education();
-        education.setName(request.getParameter("name"));
-        education.setIntro(request.getParameter("intro"));
-        education.setType(Integer.valueOf(request.getParameter("type")));
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        education.setBeginDay(fmt.parse(request.getParameter("beginDay")));
-        education.setEndDay(fmt.parse(request.getParameter("endDay")));
+        BeanUtils.populate(education, request.getParameterMap());
         if (dao.save(education)) {
             response.sendRedirect( request.getContextPath()+ "/education/admin");
         } else {

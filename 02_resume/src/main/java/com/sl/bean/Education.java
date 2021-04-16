@@ -1,5 +1,7 @@
 package com.sl.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 public class Education extends BaseBean {
@@ -20,6 +22,7 @@ public class Education extends BaseBean {
     private Date beginDay;
     private Date endDay;
 
+    @JsonIgnore
     public String getTypeString() {
         switch (type) {
             case 1: return "小学";
