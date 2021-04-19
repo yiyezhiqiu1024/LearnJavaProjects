@@ -2,6 +2,7 @@ package com.sl.servlet;
 
 import com.sl.bean.Website;
 import com.sl.service.WebsiteService;
+import com.sl.service.impl.WebsiteServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @WebServlet("/website/*")
 public class WebsiteServlet extends BaseServlet {
-    private final WebsiteService service = new WebsiteService();
+    private final WebsiteService service = new WebsiteServiceImpl();
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Website> websites = service.list();
