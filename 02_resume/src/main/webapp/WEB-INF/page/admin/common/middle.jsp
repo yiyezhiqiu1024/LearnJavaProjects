@@ -100,8 +100,8 @@
                         <span>项目经验</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../award.html">
+                <li class="award">
+                    <a href="${ctx}/award/admin">
                         <i class="material-icons">plus_one</i>
                         <span>获奖成就</span>
                     </a>
