@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>一叶知秋-Error</title>
+    <title>一叶知秋-500</title>
     <%@ include file="admin/common/head.jsp"%>
 </head>
 
 <body class="five-zero-zero">
     <div class="five-zero-zero-container">
-        <div class="error-title">喔豁，出错了</div>
-        <div class="error-msg">${error}</div>
+        <div class="error-code">500</div>
+        <div class="error-message">服务器正忙，请稍后再试...</div>
         <div class="button-place">
             <a href="#" class="btn btn-default btn-lg waves-effect">回到首页</a>
         </div>

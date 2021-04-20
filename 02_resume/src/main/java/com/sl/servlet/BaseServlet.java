@@ -47,7 +47,14 @@ public class BaseServlet extends HttpServlet {
             method.invoke(this, request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            forwardError(request, response, "访问路径有问题");
+
+            //  e一般是InvocationTargetException
+            Throwable cause = e;
+            while (cause.getCause() != null) {
+                cause = cause.getCause();
+            }
+            String error = cause.getClass().getSimpleName() + ": " + cause.getMessage();
+            forwardError(request, response, error);
         }
     }
 
