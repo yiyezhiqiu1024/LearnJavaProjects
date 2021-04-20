@@ -64,8 +64,8 @@
                         <span>个人信息</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../skill.html">
+                <li class="skill">
+                    <a href="${ctx}/skill/admin">
                         <i class="material-icons">accessibility</i>
                         <span>专业技能</span>
                     </a>
