@@ -35,7 +35,7 @@
                             </div>
                             <c:if test="${not empty awards}">
                                 <table class="table table-bordered table-hover table-striped">
-                                <thead>
+                                    <thead>
                                 <tr>
                                     <th>
                                         <div class="switch">
@@ -48,35 +48,37 @@
                                     <th>操作</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <form id="remove-form" method="post" action="${ctx}/award/remove">
-                                    <c:forEach items="${awards}" var="award">
-                                        <tr>
-                                        <td>
-                                            <div class="switch">
-                                                <label><input type="checkbox" name="id" value="${award.id}"><span class="lever switch-col-blue"></span></label>
-                                            </div>
-                                        </td>
-                                        <td>${award.name}</td>
-                                        <td>${award.image}</td>
-                                        <td>${award.intro}</td>
-                                        <td>
-                                            <button type="button" class="btn bg-blue waves-effect btn-xs"
-                                                    onclick="edit(${award.json})">
-                                                <i class="material-icons">edit</i>
-                                                <span>编辑</span>
-                                            </button>
-                                            <button type="button" class="btn bg-pink waves-effect btn-xs"
-                                                    onclick="remove('${award.id}', '${award.name}')">
-                                                <i class="material-icons">delete</i>
-                                                <span>删除</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </form>
-                                </tbody>
-                            </table>
+                                    <tbody>
+                                        <form id="remove-form" method="post" action="${ctx}/award/remove">
+                                            <c:forEach items="${awards}" var="award">
+                                                <tr>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label><input type="checkbox" name="id" value="${award.id}"><span class="lever switch-col-blue"></span></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>${award.name}</td>
+                                                    <td>
+                                                        <img src="${ctx}/${award.image}" alt="">
+                                                    </td>
+                                                    <td>${award.intro}</td>
+                                                    <td>
+                                                        <button type="button" class="btn bg-blue waves-effect btn-xs"
+                                                                onclick="edit(${award.json})">
+                                                            <i class="material-icons">edit</i>
+                                                            <span>编辑</span>
+                                                        </button>
+                                                        <button type="button" class="btn bg-pink waves-effect btn-xs"
+                                                                onclick="remove('${award.id}', '${award.name}')">
+                                                            <i class="material-icons">delete</i>
+                                                            <span>删除</span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </form>
+                                    </tbody>
+                                </table>
                             </c:if>
                         </div>
                     </div>
@@ -93,8 +95,12 @@
                     <h4 class="modal-title">添加获奖成就</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-validation" method="post" action="${ctx}/award/save">
+                    <form class="form-validation"
+                          method="post"
+                          enctype="multipart/form-data"
+                          action="${ctx}/award/save">
                         <input style="display: none;" type="text" name="id">
+                        <input style="display: none" type="text" name="image">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 form-control-label">
                                 <label>图片</label>
@@ -107,7 +113,7 @@
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                         <i class="material-icons clear fileinput-exists" data-dismiss="fileinput">close</i>
-                                        <input type="file" name="image" accept="image/*">
+                                        <input type="file" name="imageFile" accept="image/*">
                                     </div>
                                 </div>
                             </div>
@@ -159,23 +165,29 @@
 
         const $addFormBox = $('#add-form-box')
         const $addForm = $addFormBox.find('form')
+        const $img = $addForm.find('.fileinput .thumbnail img')
 
         function add() {
             $addFormBox.modal()
-            // 重置表单的内容
+            // 重置表单的内容（并不会去重置type=hidden的表单）
             $addForm[0].reset()
-            // 原生的form对象有一个reset方法
-            // document.getElement...、document.query...获取的是原生的DOM对象
-            // $()获取的是jQuery包装过的对象，并不是原生的DOM对象
+            // 重新设置图片
+            $img.attr('src', '${ctx}/asset/admin/img/noimage.png')
         }
 
         function edit(json) {
             add()
 
-            // 填充表单
+            // 填充表单信息
             for (const k in json) {
-                console.log(k + "=" + json[k]);
-                $addForm.find('[name=' + k + ']').val(json[k])
+                const $input = $addForm.find('[name=' + k + ']')
+                if ($input.attr('type') === 'file') continue
+                $input.val(json[k])
+            }
+
+            // 设置img的值
+            if (json.image) {
+                $img.attr('src', '${ctx}/' + json.image)
             }
         }
 
