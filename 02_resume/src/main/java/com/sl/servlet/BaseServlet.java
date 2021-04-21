@@ -1,5 +1,6 @@
 package com.sl.servlet;
 
+import com.sl.service.BaseService;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 
@@ -11,13 +12,27 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Date;
 
-public class BaseServlet extends HttpServlet {
+@SuppressWarnings("unchecked")
+public class BaseServlet<T> extends HttpServlet {
 
     static {
         // null参数表示允许值为null
         DateConverter dateConverter = new DateConverter(null);
         dateConverter.setPatterns(new String[]{"yyyy-MM-dd"});
         ConvertUtils.register(dateConverter, Date.class);
+    }
+
+    protected final BaseService<T> service = newService();
+    protected BaseService<T> newService() {
+        // com.sl.servlet.WebsiteServlet
+        // com.sl.service.impl.WebsiteServiceImpl
+        String clsName = getClass().getName().replace(".service.", ".service.impl.").replace("Servlet", "ServiceImpl");
+        try {
+            return (BaseService<T>) Class.forName(clsName).newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

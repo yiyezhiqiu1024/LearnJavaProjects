@@ -1,18 +1,25 @@
 package com.sl.service.impl;
 
 import com.sl.dao.BaseDao;
-import com.sl.dao.WebsiteDao;
-import com.sl.dao.impl.WebsiteDaoImpl;
 import com.sl.service.BaseService;
 
 import java.util.List;
 
-
+@SuppressWarnings("unchecked")
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
-    private final BaseDao<T> dao = newDao();
-
-    protected abstract BaseDao<T> newDao();
+    protected final BaseDao<T> dao = newDao();
+    protected BaseDao<T> newDao() {
+        // com.sl.service.impl.WebsiteServiceImpl
+        // com.sl.dao.impl.WebsiteDaoImpl
+        String clsName = getClass().getName().replace(".service", ".dao").replace("Service", "Dao");
+        try {
+            return (BaseDao<T>) Class.forName(clsName).newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     public List<T> list() {

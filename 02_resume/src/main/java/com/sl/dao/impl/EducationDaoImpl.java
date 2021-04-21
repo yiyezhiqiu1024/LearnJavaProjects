@@ -2,22 +2,17 @@ package com.sl.dao.impl;
 
 import com.sl.bean.Education;
 import com.sl.dao.EducationDao;
-import com.sl.util.Dbs;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EducationDaoImpl extends BaseDaoImpl<Education> implements EducationDao {
-    @Override
-    protected String newTable() {
-        return "education";
-    }
 
     @Override
     public List<Education> list() {
         String sql = "SELECT id, created_time, name, type, intro, begin_day, end_day FROM education";
-        return Dbs.getTpl().query(sql, new BeanPropertyRowMapper<>(Education.class));
+        return tpl.query(sql, new BeanPropertyRowMapper<>(Education.class));
     }
 
     @Override
@@ -37,7 +32,7 @@ public class EducationDaoImpl extends BaseDaoImpl<Education> implements Educatio
             args.add(id);
         }
 
-        return Dbs.getTpl().update(sql, args.toArray()) > 0;
+        return tpl.update(sql, args.toArray()) > 0;
     }
 
 

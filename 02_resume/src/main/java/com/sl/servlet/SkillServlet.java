@@ -1,8 +1,6 @@
 package com.sl.servlet;
 
 import com.sl.bean.Skill;
-import com.sl.service.SkillService;
-import com.sl.service.impl.SkillServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/skill/*")
-public class SkillServlet extends BaseServlet {
-    private SkillService service = new SkillServiceImpl();
+public class SkillServlet extends BaseServlet<Skill> {
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Skill> skills = service.list();

@@ -1,24 +1,18 @@
 package com.sl.dao.impl;
 
-import com.sl.bean.Education;
 import com.sl.bean.Website;
 import com.sl.dao.WebsiteDao;
-import com.sl.util.Dbs;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WebsiteDaoImpl extends BaseDaoImpl<Website> implements WebsiteDao {
-    @Override
-    protected String newTable() {
-        return "website";
-    }
 
     @Override
     public List<Website> list() {
         String sql = "SELECT id, created_time, footer FROM website";
-        return Dbs.getTpl().query(sql, new BeanPropertyRowMapper<>(Website.class));
+        return tpl.query(sql, new BeanPropertyRowMapper<>(Website.class));
     }
 
     @Override
@@ -34,7 +28,7 @@ public class WebsiteDaoImpl extends BaseDaoImpl<Website> implements WebsiteDao {
             args.add(id);
         }
 
-        return Dbs.getTpl().update(sql, args.toArray()) > 0;
+        return tpl.update(sql, args.toArray()) > 0;
     }
 
 

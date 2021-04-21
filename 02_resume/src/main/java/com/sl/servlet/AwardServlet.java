@@ -1,8 +1,6 @@
 package com.sl.servlet;
 
 import com.sl.bean.Award;
-import com.sl.service.AwardService;
-import com.sl.service.impl.AwardServiceImpl;
 import com.sl.util.Uploads;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -18,8 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet("/award/*")
-public class AwardServlet extends BaseServlet {
-    private AwardService service = new AwardServiceImpl();
+public class AwardServlet extends BaseServlet<Award> {
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Award> awards = service.list();

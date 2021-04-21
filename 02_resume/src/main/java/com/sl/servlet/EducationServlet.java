@@ -1,8 +1,6 @@
 package com.sl.servlet;
 
 import com.sl.bean.Education;
-import com.sl.service.EducationService;
-import com.sl.service.impl.EducationServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/education/*")
-public class EducationServlet extends BaseServlet {
-    private EducationService service = new EducationServiceImpl();
+public class EducationServlet extends BaseServlet<Education> {
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Education> educations = service.list();

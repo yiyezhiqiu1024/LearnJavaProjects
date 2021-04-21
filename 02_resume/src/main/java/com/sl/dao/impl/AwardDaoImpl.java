@@ -2,22 +2,17 @@ package com.sl.dao.impl;
 
 import com.sl.bean.Award;
 import com.sl.dao.AwardDao;
-import com.sl.util.Dbs;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AwardDaoImpl extends BaseDaoImpl<Award> implements AwardDao {
-    @Override
-    protected String newTable() {
-        return "award";
-    }
 
     @Override
     public List<Award> list() {
         String sql = "SELECT id, created_time, name, image, intro FROM award";
-        return Dbs.getTpl().query(sql, new BeanPropertyRowMapper<>(Award.class));
+        return tpl.query(sql, new BeanPropertyRowMapper<>(Award.class));
     }
 
     @Override
@@ -35,7 +30,7 @@ public class AwardDaoImpl extends BaseDaoImpl<Award> implements AwardDao {
             args.add(id);
         }
 
-        return Dbs.getTpl().update(sql, args.toArray()) > 0;
+        return tpl.update(sql, args.toArray()) > 0;
     }
 
 
