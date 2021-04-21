@@ -57,9 +57,9 @@ public class AwardServlet extends BaseServlet<Award> {
         }
     }
 
-        public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
-            String[] idStrs = request.getParameterValues("id");
-            List<Integer> ids = new ArrayList<>();
+    public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String[] idStrs = request.getParameterValues("id");
+        List<Integer> ids = new ArrayList<>();
         for (String idStr : idStrs) {
             ids.add(Integer.valueOf(idStr));
         }
