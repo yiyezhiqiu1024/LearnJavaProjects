@@ -18,14 +18,14 @@ public class EducationServlet extends BaseServlet {
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Education> educations = service.list();
         request.setAttribute("educations", educations);
-        request.getRequestDispatcher("/WEB-INF/page/admin/education.jsp").forward(request, response);
+        forward(request, response, "admin/education.jsp");
     }
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Education education = new Education();
         BeanUtils.populate(education, request.getParameterMap());
         if (service.save(education)) {
-            response.sendRedirect( request.getContextPath()+ "/education/admin");
+            redirect(request, response, "education/admin");
         } else {
             forwardError(request, response, "保存教育经验失败");
         }
@@ -38,7 +38,7 @@ public class EducationServlet extends BaseServlet {
             ids.add(Integer.valueOf(idStr));
         }
         if (service.remove(ids)) {
-            response.sendRedirect( request.getContextPath()+ "/education/admin");
+            redirect(request, response, "education/admin");
         } else {
             forwardError(request, response, "删除教育经验失败");
         }

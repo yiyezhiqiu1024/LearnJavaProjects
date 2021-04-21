@@ -24,7 +24,7 @@ public class AwardServlet extends BaseServlet {
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Award> awards = service.list();
         request.setAttribute("awards", awards);
-        request.getRequestDispatcher("/WEB-INF/page/admin/award.jsp").forward(request, response);
+        forward(request, response, "admin/award.jsp");
     }
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -54,7 +54,7 @@ public class AwardServlet extends BaseServlet {
         award.setImage(image);
 
         if (service.save(award)) { // 保存成功
-            response.sendRedirect( request.getContextPath()+ "/award/admin");
+            redirect(request, response, "award/admin");
         } else {
             forwardError(request, response, "获奖成就保存失败");
         }
@@ -67,7 +67,7 @@ public class AwardServlet extends BaseServlet {
             ids.add(Integer.valueOf(idStr));
         }
         if (service.remove(ids)) {
-            response.sendRedirect( request.getContextPath()+ "/award/admin");
+            redirect(request, response, "award/admin");
         } else {
             forwardError(request, response, "删除获奖成就失败");
         }

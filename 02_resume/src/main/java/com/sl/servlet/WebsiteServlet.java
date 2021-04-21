@@ -18,14 +18,14 @@ public class WebsiteServlet extends BaseServlet {
         List<Website> websites = service.list();
         Website website = (websites != null && !websites.isEmpty()) ? websites.get(0) : null;
         request.setAttribute("website", website);
-        request.getRequestDispatcher("/WEB-INF/page/admin/website.jsp").forward(request, response);
+        forward(request, response, "admin/website.jsp");
     }
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Website website = new Website();
         BeanUtils.populate(website, request.getParameterMap());
         if (service.save(website)) {
-            response.sendRedirect( request.getContextPath()+ "/website/admin");
+            redirect( request,response, "website/admin");
         } else {
             forwardError(request, response, "保存网站信息失败");
         }

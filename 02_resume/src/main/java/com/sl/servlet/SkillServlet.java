@@ -18,14 +18,14 @@ public class SkillServlet extends BaseServlet {
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Skill> skills = service.list();
         request.setAttribute("skills", skills);
-        request.getRequestDispatcher("/WEB-INF/page/admin/skill.jsp").forward(request, response);
+        forward(request, response, "admin/skill.jsp");
     }
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Skill skill = new Skill();
         BeanUtils.populate(skill, request.getParameterMap());
         if (service.save(skill)) {
-            response.sendRedirect( request.getContextPath()+ "/skill/admin");
+           redirect(request, response,"skill/admin");
         } else {
             forwardError(request, response, "保存专业技能失败");
         }
@@ -38,7 +38,7 @@ public class SkillServlet extends BaseServlet {
             ids.add(Integer.valueOf(idStr));
         }
         if (service.remove(ids)) {
-            response.sendRedirect( request.getContextPath()+ "/skill/admin");
+            redirect(request, response,"skill/admin");
         } else {
             forwardError(request, response, "删除专业技能失败");
         }

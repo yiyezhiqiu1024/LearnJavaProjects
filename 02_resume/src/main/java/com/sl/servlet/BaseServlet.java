@@ -58,8 +58,16 @@ public class BaseServlet extends HttpServlet {
         }
     }
 
+    protected void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException {
+        response.sendRedirect( request.getContextPath() + "/" + path);
+    }
+
+    protected void forward(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/page/" + path).forward(request, response);
+    }
+
     protected void forwardError(HttpServletRequest request, HttpServletResponse response, String error) throws ServletException, IOException {
         request.setAttribute("error", error);
-        request.getRequestDispatcher("/WEB-INF/page/error.jsp").forward(request, response);
+        forward(request, response, "error.jsp");
     }
 }
