@@ -82,8 +82,8 @@
                         <span>教育经验</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../company.html">
+                <li class="company">
+                    <a href="${ctx}/company/admin">
                         <i class="material-icons">domain</i>
                         <span>公司信息</span>
                     </a>
