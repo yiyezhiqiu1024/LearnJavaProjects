@@ -24,7 +24,7 @@ public class AwardDaoImpl extends BaseDaoImpl<Award> implements AwardDao {
         Integer id = bean.getId();
         String sql;
         if (id == null || id < 1) { // 添加
-            sql = "INSERT INTO " + table + "award(name, image, intro) VALUES (?, ?, ?)";
+            sql = "INSERT INTO " + table + "(name, image, intro) VALUES (?, ?, ?)";
         } else { // 更新
             sql = "UPDATE " + table + " SET name = ?, image = ?, intro = ? WHERE id = ?";
             args.add(id);
