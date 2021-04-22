@@ -1,5 +1,7 @@
 package com.sl.bean;
 
+import com.sl.bean.base.BaseBean;
+
 public class Company extends BaseBean {
     private String name;
     private String logo;

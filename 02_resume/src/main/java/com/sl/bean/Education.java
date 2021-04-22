@@ -1,10 +1,11 @@
 package com.sl.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sl.bean.base.DateBean;
 
 import java.util.Date;
 
-public class Education extends BaseBean {
+public class Education extends DateBean {
     private String name;
     private String intro;
     /**
@@ -19,8 +20,6 @@ public class Education extends BaseBean {
      * 8: 博士
      */
     private Integer type;
-    private Date beginDay;
-    private Date endDay;
 
     @JsonIgnore
     public String getTypeString() {
@@ -59,21 +58,5 @@ public class Education extends BaseBean {
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public Date getBeginDay() {
-        return beginDay;
-    }
-
-    public void setBeginDay(Date beginDay) {
-        this.beginDay = beginDay;
-    }
-
-    public Date getEndDay() {
-        return endDay;
-    }
-
-    public void setEndDay(Date endDay) {
-        this.endDay = endDay;
     }
 }

@@ -1,6 +1,7 @@
 package com.sl.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sl.bean.base.BaseBean;
 
 public class Skill extends BaseBean {
     private String name;

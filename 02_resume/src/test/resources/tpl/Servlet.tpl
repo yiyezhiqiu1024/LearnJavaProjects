@@ -30,14 +30,14 @@ public class #0#Servlet extends BaseServlet<#0#> {
 
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] idStrs = request.getParameterValues("id");
-            List<Integer> ids = new ArrayList<>();
-            for (String idStr : idStrs) {
-                ids.add(Integer.valueOf(idStr));
-            }
-            if (service.remove(ids)) {
-                redirect(request, response, "#1#/admin");
-            } else {
-                forwardError(request, response, "删除失败");
-            }
+        List<Integer> ids = new ArrayList<>();
+        for (String idStr : idStrs) {
+            ids.add(Integer.valueOf(idStr));
+        }
+        if (service.remove(ids)) {
+            redirect(request, response, "#1#/admin");
+        } else {
+            forwardError(request, response, "删除失败");
+        }
     }
 }

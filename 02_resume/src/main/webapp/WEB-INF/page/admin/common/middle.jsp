@@ -19,7 +19,7 @@
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="#">小码哥简历管理</a>
+            <a class="navbar-brand" href="#">一叶知秋简历管理</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -88,8 +88,8 @@
                         <span>公司信息</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../experience.html">
+                <li class="experience">
+                    <a href="${ctx}/experience/admin">
                         <i class="material-icons">work</i>
                         <span>工作经验</span>
                     </a>

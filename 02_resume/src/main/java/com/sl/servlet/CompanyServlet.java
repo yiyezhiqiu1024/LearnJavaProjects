@@ -60,14 +60,14 @@ public class CompanyServlet extends BaseServlet<Company> {
 
     public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] idStrs = request.getParameterValues("id");
-            List<Integer> ids = new ArrayList<>();
-            for (String idStr : idStrs) {
-                ids.add(Integer.valueOf(idStr));
-            }
-            if (service.remove(ids)) {
-                redirect(request, response, "company/admin");
-            } else {
-                forwardError(request, response, "删除公司信息失败");
-            }
+        List<Integer> ids = new ArrayList<>();
+        for (String idStr : idStrs) {
+            ids.add(Integer.valueOf(idStr));
+        }
+        if (service.remove(ids)) {
+            redirect(request, response, "company/admin");
+        } else {
+            forwardError(request, response, "删除公司信息失败");
+        }
     }
 }

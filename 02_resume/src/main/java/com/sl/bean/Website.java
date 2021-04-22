@@ -1,5 +1,7 @@
 package com.sl.bean;
 
+import com.sl.bean.base.BaseBean;
+
 public class Website extends BaseBean {
     private String footer;
 

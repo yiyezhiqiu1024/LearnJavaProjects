@@ -1,4 +1,4 @@
-package com.sl.bean;
+package com.sl.bean.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class BaseBean {
     private Integer id;
-    private Date createTime;
+    private Date createdTime;
 
     public Integer getId() {
         return id;
@@ -19,12 +19,12 @@ public class BaseBean {
     }
 
     @JsonIgnore
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
     @JsonIgnore

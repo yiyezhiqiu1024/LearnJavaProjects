@@ -57,4 +57,5 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         // DELETE FROM table WHERE id in (?, ?, ?)
         return tpl.update(sql.toString(), args.toArray()) > 0;
     }
+
 }
