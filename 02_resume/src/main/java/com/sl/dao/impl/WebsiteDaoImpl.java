@@ -11,7 +11,7 @@ public class WebsiteDaoImpl extends BaseDaoImpl<Website> implements WebsiteDao {
 
     @Override
     public List<Website> list() {
-        String sql = "SELECT id, created_time, footer FROM website";
+        String sql = "SELECT id, created_time, footer FROM " + table;
         return tpl.query(sql, new BeanPropertyRowMapper<>(Website.class));
     }
 
@@ -22,9 +22,9 @@ public class WebsiteDaoImpl extends BaseDaoImpl<Website> implements WebsiteDao {
         Integer id = website.getId();
         String sql;
         if (id == null || id < 1) { // 添加
-            sql = "INSERT INTO website(footer) VALUES (?)";
+            sql = "INSERT INTO " + table + "(footer) VALUES (?)";
         } else { // 更新
-            sql = "UPDATE website SET footer = ? WHERE id = ?";
+            sql = "UPDATE " + table + " SET footer = ? WHERE id = ?";
             args.add(id);
         }
 

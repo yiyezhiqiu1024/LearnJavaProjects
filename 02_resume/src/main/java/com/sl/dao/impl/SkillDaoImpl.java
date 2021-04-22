@@ -11,7 +11,7 @@ public class SkillDaoImpl extends BaseDaoImpl<Skill> implements SkillDao {
 
     @Override
     public List<Skill> list() {
-        String sql = "SELECT id, created_time, name, level FROM skill";
+        String sql = "SELECT id, created_time, name, level FROM " + table;
         return tpl.query(sql, new BeanPropertyRowMapper<>(Skill.class));
     }
 
@@ -23,9 +23,9 @@ public class SkillDaoImpl extends BaseDaoImpl<Skill> implements SkillDao {
         Integer id = bean.getId();
         String sql;
         if (id == null || id < 1) { // 添加
-            sql = "INSERT INTO skill(name, level) VALUES (?, ?)";
+            sql = "INSERT INTO " +  table + "(name, level) VALUES (?, ?)";
         } else { // 更新
-            sql = "UPDATE skill SET name = ?, level = ?  WHERE id = ?";
+            sql = "UPDATE " + table + " SET name = ?, level = ?  WHERE id = ?";
             args.add(id);
         }
 

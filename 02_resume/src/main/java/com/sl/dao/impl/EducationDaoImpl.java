@@ -11,7 +11,7 @@ public class EducationDaoImpl extends BaseDaoImpl<Education> implements Educatio
 
     @Override
     public List<Education> list() {
-        String sql = "SELECT id, created_time, name, type, intro, begin_day, end_day FROM education";
+        String sql = "SELECT id, created_time, name, type, intro, begin_day, end_day FROM " + table;
         return tpl.query(sql, new BeanPropertyRowMapper<>(Education.class));
     }
 
@@ -26,9 +26,9 @@ public class EducationDaoImpl extends BaseDaoImpl<Education> implements Educatio
         Integer id = education.getId();
         String sql;
         if (id == null || id < 1) { // 添加
-            sql = "INSERT INTO education(name, type, intro, begin_day, end_day) VALUES (?, ?, ?, ?, ?)";
+            sql = "INSERT INTO " + table + "(name, type, intro, begin_day, end_day) VALUES (?, ?, ?, ?, ?)";
         } else { // 更新
-            sql = "UPDATE education SET name = ?, type = ?, intro = ?, begin_day = ?, end_day = ? WHERE id = ?";
+            sql = "UPDATE " + table + " SET name = ?, type = ?, intro = ?, begin_day = ?, end_day = ? WHERE id = ?";
             args.add(id);
         }
 

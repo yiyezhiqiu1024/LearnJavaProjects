@@ -11,7 +11,7 @@ public class AwardDaoImpl extends BaseDaoImpl<Award> implements AwardDao {
 
     @Override
     public List<Award> list() {
-        String sql = "SELECT id, created_time, name, image, intro FROM award";
+        String sql = "SELECT id, created_time, name, image, intro FROM " + table;
         return tpl.query(sql, new BeanPropertyRowMapper<>(Award.class));
     }
 
@@ -24,9 +24,9 @@ public class AwardDaoImpl extends BaseDaoImpl<Award> implements AwardDao {
         Integer id = bean.getId();
         String sql;
         if (id == null || id < 1) { // 添加
-            sql = "INSERT INTO award(name, image, intro) VALUES (?, ?, ?)";
+            sql = "INSERT INTO " + table + "award(name, image, intro) VALUES (?, ?, ?)";
         } else { // 更新
-            sql = "UPDATE award SET name = ?, image = ?, intro = ? WHERE id = ?";
+            sql = "UPDATE " + table + " SET name = ?, image = ?, intro = ? WHERE id = ?";
             args.add(id);
         }
 

@@ -12,7 +12,7 @@ public class #0#DaoImpl extends BaseDaoImpl<#0#> implements #0#Dao {
 
     @Override
     public List<#0#> list() {
-        String sql = "SELECT id, created_time, intro FROM " + table;
+        String sql = "SELECT id, created_time, name FROM " + table;
         return tpl.query(sql, new BeanPropertyRowMapper<>(#0#.class));
     }
 
