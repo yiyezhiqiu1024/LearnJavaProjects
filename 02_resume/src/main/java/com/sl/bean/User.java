@@ -1,4 +1,4 @@
 package com.sl.bean;
 
-public class User {
+public class User extends BaseBean {
 }

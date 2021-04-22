@@ -1,4 +1,4 @@
 package com.sl.bean;
 
-public class Project {
+public class Project extends BaseBean {
 }

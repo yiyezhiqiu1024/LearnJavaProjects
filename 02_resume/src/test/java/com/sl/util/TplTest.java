@@ -38,7 +38,7 @@ public class TplTest {
             // 根据类名替换文件内容
             for (Class cls : CLASSES) {
                 String clsName = cls.getSimpleName();
-                String newText = text.replace("#0#", clsName);
+                String newText = text.replace("#0#", clsName).replace("#1#", clsName.toLowerCase());
                 String fileName = clsName + suffix + ".java";
                 String filePath = BASE_DIR + "/" + dir + "/" + fileName;
 

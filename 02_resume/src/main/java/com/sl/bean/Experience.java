@@ -1,4 +1,5 @@
 package com.sl.bean;
 
-public class Experience {
+public class Experience extends BaseBean {
+
 }
