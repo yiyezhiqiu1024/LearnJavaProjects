@@ -94,8 +94,8 @@
                         <span>工作经验</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../project.html">
+                <li class="project">
+                    <a href="${ctx}/project/admin">
                         <i class="material-icons">build</i>
                         <span>项目经验</span>
                     </a>
