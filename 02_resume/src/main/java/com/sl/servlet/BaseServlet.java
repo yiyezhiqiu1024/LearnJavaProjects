@@ -22,13 +22,14 @@ public class BaseServlet<T> extends HttpServlet {
         ConvertUtils.register(dateConverter, Date.class);
     }
 
-    protected final BaseService<T> service = newService();
+    protected BaseService<T> service = newService();
     protected BaseService<T> newService() {
         // com.sl.servlet.WebsiteServlet
         // com.sl.service.impl.WebsiteServiceImpl
-        String clsName = getClass().getName().replace(".service.", ".service.impl.").replace("Servlet", "ServiceImpl");
+        String clsName = getClass().getName().replace(".servlet.", ".service.impl.").replace("Servlet", "ServiceImpl");
         try {
-            return (BaseService<T>) Class.forName(clsName).newInstance();
+//            return (BaseService<T>) Class.forName(clsName).newInstance(); // Java 9 废弃
+            return (BaseService<T>) Class.forName(clsName).getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
