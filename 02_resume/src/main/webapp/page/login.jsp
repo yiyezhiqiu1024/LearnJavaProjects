@@ -39,7 +39,7 @@
                     <div class="form-line">
                         <input type="text" class="form-control" name="captcha" placeholder="验证码" required>
                     </div>
-                    <img src="../asset/img/captcha.png" alt="验证码">
+                    <img id="captcha" src="${ctx}/user/captcha" alt="验证码">
                 </div>
                 <div class="row">
                     <div class="col-xs-8 p-t-5">
@@ -61,6 +61,9 @@
     addValidatorRules('.form-validation', function () {
         $('[name=password]').val(md5($('#originPassword').val()))
         return true
+    })
+    $('#captcha').click(function () {
+        $(this).hide().attr('src', '${ctx}/user/captcha?time=' + new Date().getTime()).fadeIn()
     })
 </script>
 </body>
