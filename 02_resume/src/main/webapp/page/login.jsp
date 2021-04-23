@@ -28,7 +28,8 @@
                             <i class="material-icons">lock</i>
                         </span>
                     <div class="form-line">
-                        <input type="password" class="form-control" name="password" maxlength="20" placeholder="密码" required>
+                        <input type="hidden" name="password">
+                        <input id="originPassword" type="password" class="form-control" maxlength="20" placeholder="密码" required>
                     </div>
                 </div>
                 <div class="input-group form-group captcha">
@@ -55,8 +56,12 @@
 </div>
 
 <%@ include file="../WEB-INF/page/admin/common/foot.jsp" %>
+<script src="${ctx}/asset/plugin/JavaScript-MD5/md5.min.js"></script>
 <script>
-    addValidatorRules('.form-validation')
+    addValidatorRules('.form-validation', function () {
+        $('[name=password]').val(md5($('#originPassword').val()))
+        return true
+    })
 </script>
 </body>
 
