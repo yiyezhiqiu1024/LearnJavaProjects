@@ -46,6 +46,8 @@ public class UserServlet extends BaseServlet<User> {
         BeanUtils.populate(user, request.getParameterMap());
         user = ((UserService) service).get(user);
         if (user != null) { // 用户名、密码正确
+            // 登录成功后，将User对象放入Session中
+            request.getSession().setAttribute("user", user);
             redirect(request, response, "user/admin");
         } else { // 用户名、密码有问题
             forwardError(request, response, "邮箱或密码不正确");

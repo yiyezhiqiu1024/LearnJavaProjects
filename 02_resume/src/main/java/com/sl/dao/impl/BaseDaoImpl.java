@@ -34,7 +34,6 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
     protected String newTable() {
         ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();
         Class beanCls = (Class) type.getActualTypeArguments()[0];
-        System.out.println(beanCls.getSimpleName());
         return Strings.underlineCase(beanCls.getSimpleName());
     }
 
