@@ -19,7 +19,7 @@
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="#">一叶知秋简历管理</a>
+            <a class="navbar-brand" href="#">${user.name}简历管理</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -77,8 +77,8 @@
                         <span>专业技能</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../password.html">
+                <li class="password">
+                    <a href="${ctx}/user/password">
                         <i class="material-icons">lock</i>
                         <span>修改密码</span>
                     </a>

@@ -113,4 +113,29 @@ public class UserServlet extends BaseServlet<User> {
         // 将图片数据写会到客户端
         ImageIO.write(image, "jpg", response.getOutputStream());
     }
+
+    public void password(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        forward(request, response, "admin/password.jsp");
+    }
+
+    public void updatePassword(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String oldPassword = request.getParameter("oldPassword");
+        // 对比session中用户的密码
+        User user = (User) request.getSession().getAttribute("user");
+        if (!user.getPassword().equals(oldPassword)) {
+            forwardError(request, response, "旧密码不正确");
+            return;
+        }
+
+        // 保存新密码
+        String newPassword = request.getParameter("newPassword");
+        user.setPassword(newPassword);
+        if (service.save(user)) { // 保存成功
+            redirect(request, response, "page/login.jsp");
+        } else {
+            forwardError(request, response, "修改密码失败");
+        }
+    }
+
+
 }
