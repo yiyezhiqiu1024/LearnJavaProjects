@@ -4,22 +4,49 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import com.sl.bean.UploadParams;
 import com.sl.bean.User;
+import com.sl.service.AwardService;
+import com.sl.service.SkillService;
 import com.sl.service.UserService;
+import com.sl.service.WebsiteService;
+import com.sl.service.impl.AwardServiceImpl;
+import com.sl.service.impl.SkillServiceImpl;
+import com.sl.service.impl.WebsiteServiceImpl;
 import com.sl.util.Uploads;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 @WebServlet("/user/*")
 public class UserServlet extends BaseServlet<User> {
+    private SkillService skillService = new SkillServiceImpl();
+    private AwardService awardService = new AwardServiceImpl();
+    private WebsiteService websiteService = new WebsiteServiceImpl();
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+        String[] cmps = uri.split("/");
+        String methodName = "/" + cmps[cmps.length - 1];
+        if (methodName.equals(request.getContextPath())) {
+            try {
+                front(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            super.doPost(request, response);
+        }
+    }
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         User user = service.list().get(0);
@@ -137,5 +164,24 @@ public class UserServlet extends BaseServlet<User> {
         }
     }
 
+    public void front(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 用户信息
+        User user = service.list().get(0);
+        request.setAttribute("user", user);
 
+        // 个人特质
+        request.setAttribute("traits", user.getTrait().split(","));
+
+        // 兴趣爱好
+        request.setAttribute("interests", user.getInterests().split(","));
+
+        // 专业技能
+        request.setAttribute("skills", skillService.list());
+        // 获奖成就
+        request.setAttribute("awards", awardService.list());
+        // 网站的底部信息
+        request.setAttribute("footer", websiteService.list().get(0).getFooter());
+
+        forward(request, response, "front/user.jsp");
+    }
 }

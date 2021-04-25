@@ -1,35 +1,20 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<% request.setAttribute("ctx", request.getContextPath()); %>
+
 <!DOCTYPE html>
 <html lang="en" class="crt crt-nav-on crt-nav-type1 crt-main-nav-on crt-sidebar-on crt-layers-2">
 <head>
     <meta charset="utf-8">
-    <title>一叶知秋-首页</title>
-    <link href="../../../asset/front/css/icmoon.css" rel="stylesheet"><!-- Styles -->
-    <link href="../../../asset/front/css/plugins.min.css" rel="stylesheet">
-    <link href="../../../asset/front/css/style.min.css" rel="stylesheet"><!-- Modernizer -->
-    <link href="../../../asset/front/css/main.css" rel="stylesheet"><!-- Modernizer -->
+    <title>${user.name}-首页</title>
+    <link href="${ctx}/asset/front/css/icmoon.css" rel="stylesheet"><!-- Styles -->
+    <link href="${ctx}/asset/front/css/plugins.min.css" rel="stylesheet">
+    <link href="${ctx}/asset/front/css/style.min.css" rel="stylesheet"><!-- Modernizer -->
+    <link href="${ctx}/asset/front/css/main.css" rel="stylesheet"><!-- Modernizer -->
 </head>
 <body class="">
 <div class="crt-wrapper">
-    <header id="crt-header">
-        <nav id="crt-nav-sm" class="crt-nav hidden-lg hidden-md">
-            <ul class="clear-list">
-                <li>
-                    <a href="user.html">
-                        <img class="avatar avatar-42" src="../../../asset/front/img/avatar/avatar-42x42.png" alt="">
-                    </a>
-                </li>
-                <li><a href="education.html"><span
-                        class="crt-icon crt-icon-book"></span></a></li>
-                <li><a href="experience.html"><span
-                        class="crt-icon crt-icon-experience"></span></a></li>
-                <li><a href="project.html"><span
-                        class="crt-icon crt-icon-wrench"></span></a></li>
-                <li><a href="contact.html"><span
-                        class="crt-icon crt-icon-contact"></span></a></li>
-                <li><a href="../admin/user.html"><span
-                        class="crt-icon crt-icon-key"></span></a></li>
-            </ul>
-        </nav><!-- #crt-nav-sm --></header><!-- #crt-header -->
     <div id="crt-container" class="crt-container">
         <div id="crt-nav-wrap" class="hidden-sm hidden-xs">
             <div id="crt-nav-inner">
@@ -38,8 +23,15 @@
                         <nav id="crt-nav" class="crt-nav">
                             <ul class="clear-list">
                                 <li>
-                                    <a href="user.html" data-tooltip="首页">
-                                        <img class="avatar avatar-42" src="../../../asset/front/img/avatar/avatar-42x42.png" alt="">
+                                    <a href="${ctx}" data-tooltip="首页">
+                                        <c:choose>
+                                            <c:when test="${empty user.photo}">
+                                                <img class="avatar avatar-42" src="${ctx}/asset/admin/img/noimage.png" alt="">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="avatar avatar-42" src="${ctx}/${user.photo}" alt="">
+                                            </c:otherwise>
+                                        </c:choose>
                                     </a>
                                 </li>
                                 <li><a href="education.html" data-tooltip="教育经验"><span
@@ -69,12 +61,18 @@
                     <section class="section">
                         <div class="crt-card crt-card-wide bg-primary text-center">
                             <div class="crt-card-avatar">
-                                <img class="avatar avatar-195"
-                                     src="../../../asset/front/img/avatar/avatar-195x195.png"
-                                     width="195" height="195" alt=""></div>
+                                <c:choose>
+                                    <c:when test="${empty user.photo}">
+                                        <img class="avatar avatar-195" src="${ctx}/asset/admin/img/noimage.png" alt="">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="avatar avatar-195" src="${ctx}/${user.photo}" alt="">
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                             <div class="crt-card-info">
-                                <h2 class="text-upper">一叶知秋</h2>
-                                <p class="text-muted">程序员 | 全栈</p>
+                                <h2 class="text-upper">${user.name}</h2>
+                                <p class="text-muted">${user.job}</p>
                                 <ul class="crt-social clear-list">
                                     <li><a><span class="crt-icon crt-icon-wechat"></span></a></li>
                                     <li><a><span class="crt-icon crt-icon-qq"></span></a></li>
@@ -88,7 +86,7 @@
                     <section class="section brd-btm padd-box">
                         <div class="row">
                             <div class="col-sm-12 clear-mrg text-box"><h2 class="title-lg text-upper">关于我</h2>
-                                <p><b>哈罗，我是一叶知秋！</b><br>本人学识渊博、经验丰富，代码风骚、效率恐怖，C/C++ C#、Java、PHP、Android、iOS、Python、JavaScript，无不精通玩转，熟练掌握各种框架，并自写语言，创操作系统，写CPU处理器构架，做指令集成。深山苦练20余年，一天只睡3小时，千里之外定位问题，瞬息之间修复上线。身体强壮、健步如飞，可连续工作100小时不休息，讨论技术方案9小时不喝水，上至研发CPU芯片、带项目、出方案、弄计划，下至盗账号、黑网站、Shell提权挂马、攻击同行、拍片摄影、泡妞把妹纸、开挖掘机、威胁PM，啥都能干。</p>
+                                <p><b>哈罗，我是${user.name}！</b><br>${user.intro}</p>
                             </div>
                         </div>
                     </section><!-- .section -->
@@ -98,15 +96,15 @@
                                 <h2 class="title-thin text-muted">个人信息</h2>
                                 <dl class="dl-horizontal clear-mrg">
                                     <dt class="text-upper">姓名</dt>
-                                    <dd>一叶知秋</dd>
+                                    <dd>${user.name}</dd>
                                     <dt class="text-upper">生日</dt>
-                                    <dd>1989-07-22</dd>
+                                    <dd><fmt:formatDate pattern="yyyy-MM-dd" value="${user.birthday}" /></dd>
                                     <dt class="text-upper">住址</dt>
-                                    <dd>深圳市深南路</dd>
+                                    <dd>${user.address}</dd>
                                     <dt class="text-upper">邮箱</dt>
-                                    <dd><a href="mailto:359297567@qq.com">359297567@qq.com</a></dd>
+                                    <dd><a href="mailto:${user.email}">${user.email}</a></dd>
                                     <dt class="text-upper">电话</dt>
-                                    <dd>138-8888-8866</dd>
+                                    <dd>${user.phone}</dd>
                                 </dl>
                             </div><!-- .col-sm-6 -->
                         </div><!-- .row -->
@@ -115,22 +113,16 @@
                         <div class="row">
                             <div class="col-sm-12 clear-mrg">
                                 <h2 class="title-thin text-muted">专业技能</h2>
-                                <div class="progress-line crt-animate">
-                                    <strong class="progress-title">Php & MySQL</strong>
-                                    <div class="progress-bar" data-text="精通" data-value="1"></div>
-                                </div>
-                                <div class="progress-line crt-animate">
-                                    <strong class="progress-title">Javascript</strong>
-                                    <div class="progress-bar" data-text="掌握" data-value="0.75"></div>
-                                </div>
-                                <div class="progress-line crt-animate">
-                                    <strong class="progress-title">UX Design</strong>
-                                    <div class="progress-bar" data-text="熟悉" data-value="0.5"></div>
-                                </div>
-                                <div class="progress-line crt-animate">
-                                    <strong class="progress-title">UI Design</strong>
-                                    <div class="progress-bar" data-text="了解" data-value="0.25"></div>
-                                </div>
+
+                                <c:forEach items="${skills}" var="skill">
+                                    <div class="progress-line crt-animate">
+                                        <strong class="progress-title">${skill.name}</strong>
+                                        <div class="progress-bar"
+                                             data-text="${skill.levelString}"
+                                             data-value="${(skill.level + 1) * 0.25}"></div>
+                                    </div>
+                                </c:forEach>
+
                             </div><!-- .col-sm-6 -->
                         </div><!-- .row -->
                     </section><!-- .section -->
@@ -139,10 +131,7 @@
                             <div class="col-sm-12 clear-mrg">
                                 <h2 class="title-thin text-muted">个人特质</h2>
                                 <ul class="styled-list icon-list-col3 clear-mrg">
-                                    <li>学识渊博</li>
-                                    <li>经验丰富</li>
-                                    <li>学识渊博</li>
-                                    <li>效率恐怖</li>
+                                    <c:forEach items="${traits}" var="trait"><li>${trait}</li></c:forEach>
                                 </ul>
                             </div><!-- .col-sm-6 --></div><!-- .row --></section><!-- .section -->
                     <section class="section brd-btm padd-box">
@@ -150,10 +139,9 @@
                             <div class="col-sm-12 clear-mrg">
                                 <h2 class="title-thin text-muted">兴趣爱好</h2>
                                 <ul class="icon-list icon-list-col3 clearfix">
-                                    <li><span class="crt-icon crt-icon-check-circle"></span>足球</li>
-                                    <li><span class="crt-icon crt-icon-check-circle"></span>台球</li>
-                                    <li><span class="crt-icon crt-icon-check-circle"></span>羽毛球</li>
-                                    <li><span class="crt-icon crt-icon-check-circle"></span>电玩</li>
+                                    <c:forEach items="${interests}" var="interest">
+                                        <li><span class="crt-icon crt-icon-check-circle"></span>${interest}</li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -161,20 +149,22 @@
                     <section class="section padd-box">
                         <h2 class="title-thin text-muted">获奖成就</h2>
                         <div class="row">
-                            <div class="col-sm-6 clear-mrg">
-                                <div class="award-box">
-                                    <img class="award-img" src="../../../asset/front/img/awards/award00.jpg" alt="">
-                                    <h3 class="award-title">图灵奖</h3>
-                                    <div class="award-text text-muted clear-mrg"><p>计算机界的诺贝尔奖</p></div>
-                                </div>
-                            </div><!-- .col-sm-6 -->
-                            <div class="col-sm-6 clear-mrg">
-                                <div class="award-box">
-                                    <img class="award-img" src="../../../asset/front/img/awards/award01.jpeg" alt="">
-                                    <h3 class="award-title">菲尔兹奖</h3>
-                                    <div class="award-text text-muted clear-mrg"><p>数学界的诺贝尔奖</p></div>
-                                </div>
-                            </div><!-- .col-sm-6 -->
+                            <c:forEach items="${awards}" var="award">
+                                <div class="col-sm-6 clear-mrg">
+                                    <div class="award-box">
+                                        <c:choose>
+                                            <c:when test="${empty award.image}">
+                                                <img src="${ctx}/asset/admin/img/noimage.png" alt="">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img width="200" src="${ctx}/${award.image}" alt="">
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <h3 class="award-title">${award.name}</h3>
+                                        <div class="award-text text-muted clear-mrg"><p>${award.intro}</p></div>
+                                    </div>
+                                </div><!-- .col-sm-6 -->
+                            </c:forEach>
                         </div><!-- .row -->
                     </section><!-- .section -->
                 </div>
@@ -185,7 +175,7 @@
     <!-- .crt-container -->
     <footer id="crt-footer" class="crt-container-lg">
         <div class="crt-container">
-            <div class="crt-container-sm clear-mrg text-center"><p>一叶知秋 &copy; All Rights Reserved 2021</p></div>
+            <div class="crt-container-sm clear-mrg text-center"><p>${footer}</p></div>
         </div><!-- .crt-container -->
     </footer><!-- #crt-footer -->
     <svg id="crt-bg-shape-1" class="hidden-sm hidden-xs" height="519" width="758">
@@ -195,9 +185,9 @@
         <polygon points="0,0,633,0,633,536"/>
     </svg>
 </div><!-- .crt-wrapper --><!-- Scripts -->
-<script src="../../../asset/front/js/modernizr-3.3.1.min.js"></script>
-<script src="../../../asset/plugin/jquery/jquery.min.js"></script>
-<script src="../../../asset/front/js/plugins.min.js"></script>
-<script src="../../../asset/front/js/theme.min.js"></script>
+<script src="${ctx}/asset/front/js/modernizr-3.3.1.min.js"></script>
+<script src="${ctx}/asset/plugin/jquery/jquery.min.js"></script>
+<script src="${ctx}/asset/front/js/plugins.min.js"></script>
+<script src="${ctx}/asset/front/js/theme.min.js"></script>
 </body>
 </html>

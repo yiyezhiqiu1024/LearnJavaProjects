@@ -54,7 +54,7 @@
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="../../front/user.html"><i class="material-icons">person</i>个人信息</a></li>
+                        <li><a href="${ctx}/user/front"><i class="material-icons">person</i>个人信息</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="${ctx}/user/logout"><i class="material-icons">input</i>退出登录</a></li>
                     </ul>
@@ -113,8 +113,8 @@
                         <span>获奖成就</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../contact.html">
+                <li class="contact">
+                    <a href="${ctx}/contact/admin">
                         <i class="material-icons">comment</i>
                         <span>留言信息</span>
                     </a>
