@@ -58,8 +58,8 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li>
-                    <a href="../user.html">
+                <li class="user">
+                    <a href="${ctx}/user/admin">
                         <i class="material-icons">person</i>
                         <span>个人信息</span>
                     </a>

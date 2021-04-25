@@ -12,7 +12,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
     @Override
     public List<User> list() {
-        String sql = "SELECT id, created_time, password, email, phone, intro, name, birthday, address, phone, job, trait, interests FROM " + table;
+        String sql = "SELECT id, created_time, password, email, photo, intro, name, birthday, address, phone, job, trait, interests FROM " + table;
         return tpl.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
@@ -21,7 +21,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         List<Object> args = new ArrayList<>();
         args.add(bean.getPassword());
         args.add(bean.getEmail());
-        args.add(bean.getPhone());
+        args.add(bean.getPhoto());
         args.add(bean.getIntro());
         args.add(bean.getName());
         args.add(bean.getBirthday());
@@ -33,9 +33,9 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         Integer id = bean.getId();
         String sql;
         if (id == null || id < 1) { // 添加
-            sql = "INSERT INTO " + table + "(password, email, phone, intro, name, birthday, address, phone, job, trait, interests) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO " + table + "(password, email, photo, intro, name, birthday, address, phone, job, trait, interests) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         } else { // 更新
-            sql = "UPDATE " + table + " SET password = ?, email = ?, phone = ?, intro = ?, name = ?, birthday = ?, address = ?, phone = ?, job = ?, trait = ?, interests = ? WHERE id = ?";
+            sql = "UPDATE " + table + " SET password = ?, email = ?, photo = ?, intro = ?, name = ?, birthday = ?, address = ?, phone = ?, job = ?, trait = ?, interests = ? WHERE id = ?";
             args.add(id);
         }
 
