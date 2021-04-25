@@ -1,12 +1,15 @@
-﻿<!DOCTYPE html>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
     <title>一叶知秋简历管理-获奖成就</title>
-    <%@ include file="common/head.jsp" %>
+    <%@ include file="common/nav.jsp" %>
 </head>
 
 <body class="theme-blue">
-    <%@ include file="common/middle.jsp" %>
+    <%@ include file="common/style.jsp" %>
 
     <section class="content">
         <div class="container-fluid">
@@ -157,7 +160,7 @@
         </div>
     </div>
 
-    <%@ include file="common/foot.jsp" %>
+    <%@ include file="common/script.jsp" %>
     <script>
         addValidatorRules('.form-validation')
 
