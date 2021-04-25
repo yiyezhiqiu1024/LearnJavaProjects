@@ -17,7 +17,7 @@
                                 </c:choose>
                             </a>
                         </li>
-                        <li><a href="education.html" data-tooltip="教育经验"><span
+                        <li><a href="${ctx}/education/front" data-tooltip="教育经验"><span
                                 class="crt-icon crt-icon-book"></span></a></li>
                         <li><a href="experience.html" data-tooltip="工作经验"><span
                                 class="crt-icon crt-icon-experience"></span></a></li>

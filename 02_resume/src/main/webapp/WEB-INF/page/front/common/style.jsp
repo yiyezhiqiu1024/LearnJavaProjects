@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% request.setAttribute("ctx", request.getContextPath()); %>
 <meta charset="utf-8">
 <title>${user.name}-首页</title>
 <link href="${ctx}/asset/front/css/icmoon.css" rel="stylesheet"><!-- Styles -->
