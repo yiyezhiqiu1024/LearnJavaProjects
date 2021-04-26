@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <title>一叶知秋-500</title>
-    <%@ include file="admin/common/nav.jsp"%>
+    <%@ include file="admin/common/style.jsp"%>
 </head>
 
 <body class="five-zero-zero">

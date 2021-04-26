@@ -2,8 +2,13 @@ package com.sl.servlet;
 
 import com.sl.bean.Company;
 import com.sl.bean.Experience;
+import com.sl.bean.User;
 import com.sl.service.CompanyService;
+import com.sl.service.UserService;
+import com.sl.service.WebsiteService;
 import com.sl.service.impl.CompanyServiceImpl;
+import com.sl.service.impl.UserServiceImpl;
+import com.sl.service.impl.WebsiteServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +20,8 @@ import java.util.List;
 @WebServlet("/experience/*")
 public class ExperienceServlet extends BaseServlet<Experience> {
     private CompanyService companyService = new CompanyServiceImpl();
+    private UserService userService = new UserServiceImpl();
+    private WebsiteService websiteService = new WebsiteServiceImpl();
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Experience> experiences = service.list();
@@ -50,5 +57,16 @@ public class ExperienceServlet extends BaseServlet<Experience> {
         } else {
             forwardError(request, response, "工作经验删除失败");
         }
+    }
+
+    public void front(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 用户信息
+        request.setAttribute("user", userService.list().get(0));
+        // 工作经验
+        request.setAttribute("experiences", service.list());
+        // 网站的底部信息
+        request.setAttribute("footer", websiteService.list().get(0).getFooter());
+
+        forward(request, response, "front/experience.jsp");
     }
 }

@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <title>一叶知秋简历管理-登录</title>
-    <%@ include file="../WEB-INF/page/admin/common/nav.jsp" %>
+    <%@ include file="../WEB-INF/page/admin/common/style.jsp" %>
 </head>
 
 <body class="login-page">

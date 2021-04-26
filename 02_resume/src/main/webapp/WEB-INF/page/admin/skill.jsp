@@ -4,11 +4,11 @@
 <html lang="zh">
 <head>
     <title>一叶之秋简历管理-专业技能</title>
-    <%@ include file="common/nav.jsp" %>
+    <%@ include file="common/style.jsp" %>
 </head>
 
 <body class="theme-blue">
-    <%@ include file="common/style.jsp" %>
+    <%@ include file="common/nav.jsp" %>
 
     <section class="content">
         <div class="container-fluid">
