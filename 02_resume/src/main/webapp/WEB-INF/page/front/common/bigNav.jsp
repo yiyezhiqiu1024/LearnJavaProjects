@@ -21,7 +21,7 @@
                                 class="crt-icon crt-icon-book"></span></a></li>
                         <li><a href="${ctx}/experience/front" data-tooltip="工作经验"><span
                                 class="crt-icon crt-icon-experience"></span></a></li>
-                        <li><a href="project.html" data-tooltip="项目经验"><span
+                        <li><a href="${ctx}/project/front" data-tooltip="项目经验"><span
                                 class="crt-icon crt-icon-wrench"></span></a></li>
                         <li><a href="contact.html" data-tooltip="联系我吧"><span
                                 class="crt-icon crt-icon-contact"></span></a></li>

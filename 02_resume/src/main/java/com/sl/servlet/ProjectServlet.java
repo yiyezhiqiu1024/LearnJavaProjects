@@ -4,7 +4,11 @@ import com.sl.bean.Company;
 import com.sl.bean.Project;
 import com.sl.bean.UploadParams;
 import com.sl.service.CompanyService;
+import com.sl.service.UserService;
+import com.sl.service.WebsiteService;
 import com.sl.service.impl.CompanyServiceImpl;
+import com.sl.service.impl.UserServiceImpl;
+import com.sl.service.impl.WebsiteServiceImpl;
 import com.sl.util.Uploads;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -18,6 +22,8 @@ import java.util.List;
 @WebServlet("/project/*")
 public class ProjectServlet extends BaseServlet<Project> {
     private CompanyService companyService = new CompanyServiceImpl();
+    private UserService userService = new UserServiceImpl();
+    private WebsiteService websiteService = new WebsiteServiceImpl();
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Project> projects = service.list();
@@ -59,5 +65,12 @@ public class ProjectServlet extends BaseServlet<Project> {
         } else {
             forwardError(request, response, "项目经验删除失败");
         }
+    }
+
+    public void front(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setAttribute("user", userService.list().get(0));
+        request.setAttribute("projects", service.list());
+        request.setAttribute("footer", websiteService.list().get(0).getFooter());
+        forward(request, response, "front/project.jsp");
     }
 }
