@@ -91,8 +91,9 @@ public class UserServlet extends BaseServlet<User> {
         // 检查验证码
         String captcha = request.getParameter("captcha").toLowerCase();
 
+        HttpSession session = request.getSession();
         // 从Session中取出验证码
-        String code = (String) request.getSession().getAttribute("code");
+        String code = (String) session.getAttribute("code");
 
         if (!captcha.equals(code)) {
             // forwardError(request, response, "验证码不正确");
@@ -105,7 +106,7 @@ public class UserServlet extends BaseServlet<User> {
             user = ((UserService) service).get(user);
             if (user != null) { // 用户名、密码正确
                 // 登录成功后，将User对象放入Session中
-                request.getSession().setAttribute("user", user);
+                session.setAttribute("user", user);
                 // redirect(request, response, "user/admin");
                 result.put("success", true);
             } else { // 用户名、密码有问题
@@ -114,6 +115,11 @@ public class UserServlet extends BaseServlet<User> {
                 result.put("msg", "邮箱或密码不正确");
             }
         }
+
+        // 延长 JSESSION 在客户端的寿命
+        Cookie cookie = new Cookie("JSESSIONID", session.getId());
+        cookie.setMaxAge(3600 * 24 * 7); // 7天免登录
+        response.addCookie(cookie);
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(result));
     }
