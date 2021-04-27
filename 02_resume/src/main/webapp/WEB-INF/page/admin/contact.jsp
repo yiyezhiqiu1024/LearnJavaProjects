@@ -307,6 +307,19 @@
         for (const k in json) {
             $viewForm.find('[name=' + k + ']').val(json[k])
         }
+
+        // 发送AJAX请求告诉服务器：已读
+        $.getJSON('${ctx}/contact/read', {id: json.id}, function (data) {
+            if (data.success) {
+                // 利用JS让对应的checkbox打勾
+                // $('#read-' + json.id).attr('checked', 'checked')
+                // $('#read-' + json.id).prop('checked', 'checked')
+                // $('#read-' + json.id).prop('checked', true)
+                $('#read-' + json.id).attr('checked', true)
+            } else {
+                console.log('查看失败')
+            }
+        })
     }
 
     function go(pageNo) {

@@ -119,4 +119,10 @@ public class ContactDaoImpl extends BaseDaoImpl<Contact> implements ContactDao {
 
         return result;
     }
+
+    @Override
+    public boolean read(Integer id) {
+        String sql = "UPDATE contact SET already_read = 1 WHERE id = ?";
+        return tpl.update(sql, id) > 0;
+    }
 }
