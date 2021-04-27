@@ -8,9 +8,8 @@
 </head>
 <body class="">
     <div class="crt-wrapper">
-        <header id="crt-header">
-            <%@ include file="common/smallNav.jsp" %>
-        </header><!-- #crt-header -->
+        <%@ include file="common/smallNav.jsp" %>
+
         <div id="crt-container" class="crt-container">
             <%@ include file="common/bigNav.jsp" %>
             <div class="crt-container-sm">

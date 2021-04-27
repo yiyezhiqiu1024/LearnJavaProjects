@@ -1,6 +1,10 @@
 package com.sl.servlet;
 
 import com.sl.bean.Contact;
+import com.sl.service.UserService;
+import com.sl.service.WebsiteService;
+import com.sl.service.impl.UserServiceImpl;
+import com.sl.service.impl.WebsiteServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +15,8 @@ import java.util.List;
 
 @WebServlet("/contact/*")
 public class ContactServlet extends BaseServlet<Contact> {
+    private UserService userService = new UserServiceImpl();
+    private WebsiteService websiteService = new WebsiteServiceImpl();
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Contact> contacts = service.list();
@@ -19,25 +25,27 @@ public class ContactServlet extends BaseServlet<Contact> {
     }
 
     public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 检查验证码
+        String code = (String) request.getSession().getAttribute("code");
+        String captcha = request.getParameter("captcha");
+        if (!code.equals(captcha)) {
+            forwardError(request, response, "验证码错误");
+            return;
+        }
+
         Contact contact = new Contact();
         BeanUtils.populate(contact, request.getParameterMap());
-        if (service.save(contact)) {
-            redirect(request, response, "contact/admin");
+        if (service.save(contact)) { // 保存成功
+            redirect(request, response, "contact/front");
         } else {
-            forwardError(request, response, "保存失败");
+            forwardError(request, response, "留言信息保存失败");
         }
     }
 
-    public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String[] idStrs = request.getParameterValues("id");
-            List<Integer> ids = new ArrayList<>();
-            for (String idStr : idStrs) {
-                ids.add(Integer.valueOf(idStr));
-            }
-            if (service.remove(ids)) {
-                redirect(request, response, "contact/admin");
-            } else {
-                forwardError(request, response, "删除失败");
-            }
+    public void front(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setAttribute("user", userService.list().get(0));
+        request.setAttribute("footer", websiteService.list().get(0).getFooter());
+        // 转发
+        forward(request, response, "front/contact.jsp");
     }
 }

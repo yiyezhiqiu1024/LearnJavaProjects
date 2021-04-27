@@ -20,7 +20,7 @@
                     class="crt-icon crt-icon-experience"></span></a></li>
             <li><a href="${ctx}/project/front" data-tooltip="项目经验"><span
                     class="crt-icon crt-icon-wrench"></span></a></li>
-            <li><a href="contact.html" data-tooltip="联系我吧"><span
+            <li><a href="${ctx}/contact/front" data-tooltip="联系我吧"><span
                     class="crt-icon crt-icon-contact"></span></a></li>
             <li><a href="${ctx}/user/admin" data-tooltip="后台管理"><span
                     class="crt-icon crt-icon-key"></span></a></li>
