@@ -1,6 +1,8 @@
 package com.sl.dao.impl;
 
 import com.sl.bean.Contact;
+import com.sl.bean.ContactListParam;
+import com.sl.bean.ContactListResult;
 import com.sl.dao.ContactDao;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -34,5 +36,87 @@ public class ContactDaoImpl extends BaseDaoImpl<Contact> implements ContactDao {
             args.add(id);
         }
         return tpl.update(sql, args.toArray()) > 0;
+    }
+
+    @Override
+    public ContactListResult list(ContactListParam param) {
+        ContactListResult result = new ContactListResult();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT id, created_time, name, email, comment, subject, already_read FROM contact WHERE 1 = 1 ");
+
+        // 参数
+        List<Object> args = new ArrayList<>();
+
+        // 条件
+        StringBuilder condition = new StringBuilder();
+
+        if (param.getBeginDay() != null) { // 开始时间
+            condition.append("AND created_time >= ? ");
+            args.add(param.getBeginDay());
+            result.setBeginDay(param.getBeginDay());
+        }
+
+        if (param.getEndDay() != null) { // 结束时间
+            condition.append("AND created_time <= ? ");
+            args.add(param.getEndDay());
+            result.setEndDay(param.getEndDay());
+        }
+
+        String keyword = param.getKeyword();
+        if (keyword != null && keyword.length() > 0) { // 关键字
+            result.setKeyword(keyword);
+            condition.append("AND (name LIKE ? OR email LIKE ? OR subject LIKE ? OR comment LIKE ?) ");
+            keyword = "%" + keyword + "%";
+            args.add(keyword);
+            args.add(keyword);
+            args.add(keyword);
+            args.add(keyword);
+        }
+
+        Integer read = param.getAlreadyRead();
+        if (read != null && read < ContactListParam.READ_ALL) { // 阅读状态
+            condition.append("AND already_read = ? ");
+            args.add(read);
+            result.setAlreadyRead(read);
+        }
+
+        // 总数量、总页数
+        Integer pageSize = param.getPageSize();
+        if (pageSize == null || pageSize < 10) {
+            pageSize = 10;
+        }
+
+        /*
+        总数量：101
+        每一页显示20条
+        总页数 = (总数量 + 每页的数量 - 1) / 每页的数量
+         */
+        String countSql = "SELECT COUNT(*) FROM contact WHERE 1 = 1 " + condition;
+        Integer totalCount = tpl.queryForObject(countSql, Integer.class, args.toArray());
+        if (totalCount == 0) return result;
+
+        int totalPages = (totalCount + pageSize - 1) / pageSize;
+        result.setTotalPages(totalPages); // 2
+        result.setTotalCount(totalCount);
+
+        // 分页
+        sql.append(condition);
+        sql.append("LIMIT ?, ?");
+        Integer pageNo = param.getPageNo(); // 9
+        if (pageNo == null || pageNo < 1) {
+            pageNo = 1;
+        } else if (pageNo > totalPages) { // 页码如果已经超过了总页数
+            pageNo = totalPages;
+        }
+        args.add((pageNo - 1) * pageSize);
+        args.add(pageSize);
+        result.setPageNo(pageNo);
+        result.setPageSize(pageSize);
+
+        List<Contact> contacts = tpl.query(sql.toString(), new BeanPropertyRowMapper<>(Contact.class), args.toArray());
+        result.setContacts(contacts);
+
+        return result;
     }
 }

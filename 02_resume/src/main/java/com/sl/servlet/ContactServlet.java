@@ -1,6 +1,8 @@
 package com.sl.servlet;
 
 import com.sl.bean.Contact;
+import com.sl.bean.ContactListParam;
+import com.sl.service.ContactService;
 import com.sl.service.UserService;
 import com.sl.service.WebsiteService;
 import com.sl.service.impl.UserServiceImpl;
@@ -10,8 +12,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/contact/*")
 public class ContactServlet extends BaseServlet<Contact> {
@@ -19,8 +19,10 @@ public class ContactServlet extends BaseServlet<Contact> {
     private WebsiteService websiteService = new WebsiteServiceImpl();
 
     public void admin(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<Contact> contacts = service.list();
-        request.setAttribute("contacts", contacts);
+        ContactListParam param = new ContactListParam();
+        BeanUtils.populate(param, request.getParameterMap());
+
+        request.setAttribute("result", ((ContactService) service).list(param));
         forward(request, response, "admin/contact.jsp");
     }
 
