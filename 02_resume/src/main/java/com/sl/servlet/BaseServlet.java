@@ -14,14 +14,6 @@ import java.util.Date;
 
 @SuppressWarnings("unchecked")
 public class BaseServlet<T> extends HttpServlet {
-
-    static {
-        // null参数表示允许值为null
-        DateConverter dateConverter = new DateConverter(null);
-        dateConverter.setPatterns(new String[]{"yyyy-MM-dd"});
-        ConvertUtils.register(dateConverter, Date.class);
-    }
-
     protected BaseService<T> service = newService();
     protected BaseService<T> newService() {
         // com.sl.servlet.WebsiteServlet
