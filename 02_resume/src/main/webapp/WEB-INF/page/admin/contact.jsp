@@ -69,7 +69,7 @@
                                         <td>${contact.comment}</td>
                                         <td>
                                             <button type="button" class="btn bg-blue waves-effect btn-xs"
-                                                    onclick="view()">
+                                                    onclick="view(${contact.json})">
                                                 <i class="material-icons">edit</i>
                                                 <span>查看</span>
                                             </button>
@@ -213,6 +213,10 @@
     <%@ include file="common/script.jsp"%>
 <script>
 
+    /* 变量和常量 */
+    const $viewFormBox = $('#view-form-box')
+    const $viewForm = $viewFormBox.find('form')
+
     /* 初始化 */
     $('.menu .list .contact').addClass('active')
 
@@ -222,8 +226,15 @@
         placeholder: '____/__/__'
     })
 
-    function view() {
-        $('#view-form-box').modal()
+    /* 函数 */
+    function view(json) {
+        // 显示数据框
+        $viewFormBox.modal()
+
+        // 填充表单信息
+        for (const k in json) {
+            $viewForm.find('[name=' + k + ']').val(json[k])
+        }
     }
 </script>
 </body>

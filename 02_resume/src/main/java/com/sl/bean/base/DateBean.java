@@ -1,9 +1,15 @@
 package com.sl.bean.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class DateBean extends BaseBean {
     private Date beginDay;
+
+    private Date endDay;
 
     public Date getBeginDay() {
         return beginDay;
@@ -21,6 +27,10 @@ public abstract class DateBean extends BaseBean {
         this.endDay = endDay;
     }
 
-    private Date endDay;
-
+    @JsonIgnore
+    public String getJson() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+        return mapper.writeValueAsString(this).replace("\"", "'");
+    }
 }

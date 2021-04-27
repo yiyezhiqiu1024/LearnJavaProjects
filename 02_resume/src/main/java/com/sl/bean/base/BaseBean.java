@@ -18,7 +18,6 @@ public class BaseBean {
         this.id = id;
     }
 
-    @JsonIgnore
     public Date getCreatedTime() {
         return createdTime;
     }
@@ -27,16 +26,11 @@ public class BaseBean {
         this.createdTime = createdTime;
     }
 
+
     @JsonIgnore
     public String getJson() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         return mapper.writeValueAsString(this).replace("\"", "'");
-//        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-//        String beginDayString = fmt.format(beginDay);
-//        String endDayString = fmt.format(endDay);
-//        return "{name:'" + name + "', intro:'"
-//                + intro + "', beginDay:'" + beginDayString
-//                + "', endDay:'" + endDayString + "', type:" + type + "}";
     }
 }
