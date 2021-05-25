@@ -1,9 +1,7 @@
 package com.sl.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.sl.pojo.po.DictType;
 
-import java.util.List;
-
-public interface DictTypeService {
-    List<DictType> list();
+public interface DictTypeService extends IService<DictType> {
 }
