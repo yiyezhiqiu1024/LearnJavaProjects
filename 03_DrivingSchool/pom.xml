@@ -43,6 +43,12 @@
             <version>${mybatis.version}</version>
         </dependency>
 
+        <!-- Freemarker -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
         <!-- debug阶段 -->
         <!-- 配置文件属性名提示 -->
         <dependency>
@@ -84,6 +90,14 @@
                         <version>5.1.49</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>13</source>
+                    <target>13</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
