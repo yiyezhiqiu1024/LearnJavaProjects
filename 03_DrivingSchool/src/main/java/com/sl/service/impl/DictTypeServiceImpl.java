@@ -21,7 +21,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
     private DictTypeMapper mapper;
 
     @Override
-    public List<DictType> list(DictTypeQuery query) {
+    public void list(DictTypeQuery query) {
         // 查询条件
         LambdaQueryWrapper<DictType> queryWrapper = new LambdaQueryWrapper<>();
 
@@ -35,7 +35,11 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
 
         // 分页对象
         Page<DictType> page = new Page<>(query.getPage(), query.getSize());
-
-        return mapper.selectPage(page, queryWrapper).getRecords();
+        // 查询
+        mapper.selectPage(page, queryWrapper);
+        // 填充query
+        query.setRecords(page.getRecords());
+        query.setTotal(page.getTotal());
+        query.setPages(page.getPages());
     }
 }

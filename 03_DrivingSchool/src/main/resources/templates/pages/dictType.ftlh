@@ -339,31 +339,35 @@
             <!-- Start Page Content -->
             <!-- ============================================================== -->
 
-            <div class="row">
-                <div class="col-md-4 col-12 form-group">
-                    <input type="text" class="form-control" placeholder="名称、值、简介">
-                </div>
-                <div class="col-md-4 col-6 form-group">
-                    <button type="button" class="btn btn-secondary waves-effect waves-light mr-1">
-                        <span class="btn-label"><i class="fas fa-redo"></i></span> 重置
-                    </button>
-                    <button type="submit"
-                            id="search-btn"
-                            class="btn btn-info waves-effect waves-light mr-1">
-                        <span class="btn-label"><i class="fas fa-search"></i></span> 搜索
-                    </button>
-                </div>
-                <div class="col-md-4 col-6 form-group d-flex justify-content-end">
-                    <button type="button" id="btn-add"
-                            class="btn btn-info waves-effect waves-light mr-2">
-                        <span class="btn-label"><i class="fas fa-plus"></i></span> 添加
-                    </button>
-                    <button type="button" id="btn-batch-remove"
-                            class="btn btn-danger waves-effect waves-light disabled">
-                        <span class="btn-label"><i class="fas fa-trash"></i></span> 批量删除
-                    </button>
-                </div>
-            </div>
+           <form id="search-form" action="${ctx}/dictTypes/list">
+               <input type="hidden" name="page" value="${data.page}">
+               <input type="hidden" name="size" value="${data.size}">
+               <div class="row">
+                   <div class="col-md-4 col-12 form-group">
+                       <input type="text" class="form-control" name="keyword" value="${data.keyword!}" placeholder="名称、值、简介">
+                   </div>
+                   <div class="col-md-4 col-6 form-group">
+                       <button type="button" class="btn btn-secondary waves-effect waves-light mr-1">
+                           <span class="btn-label"><i class="fas fa-redo"></i></span> 重置
+                       </button>
+                       <button type="submit"
+                               id="search-btn"
+                               class="btn btn-info waves-effect waves-light mr-1">
+                           <span class="btn-label"><i class="fas fa-search"></i></span> 搜索
+                       </button>
+                   </div>
+                   <div class="col-md-4 col-6 form-group d-flex justify-content-end">
+                       <button type="button" id="btn-add"
+                               class="btn btn-info waves-effect waves-light mr-2">
+                           <span class="btn-label"><i class="fas fa-plus"></i></span> 添加
+                       </button>
+                       <button type="button" id="btn-batch-remove"
+                               class="btn btn-danger waves-effect waves-light disabled">
+                           <span class="btn-label"><i class="fas fa-trash"></i></span> 批量删除
+                       </button>
+                   </div>
+               </div>
+           </form>
 
             <div class="row">
                 <div class="col-12">
@@ -383,7 +387,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <#list items as item>
+                                    <#list data.records as item>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" id="cb_0" class="material-inputs filled-in chk-col-light-blue">
@@ -419,19 +423,11 @@
                         </select>
                         条
                     </label>
-                    ，共5页，共100条
+                    ，共${data.pages}页，共${data.total}条
                 </div>
                 <div class="col-md-6 col-12 d-flex justify-content-end">
                     <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="javascript:void(0)" tabindex="-1">上一页</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
-                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                        <li class="page-item ">
-                            <a class="page-link" href="javascript:void(0)" tabindex="-1">上一页</a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -616,6 +612,7 @@
 <!-- Bootstrap tether Core JavaScript -->
 <script src="${ctx}/assets/libs/popper/popper.min.js"></script>
 <script src="${ctx}/assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src="${ctx}/assets/libs/bootstrap/bootstrap-paginator.min.js"></script>
 <!-- apps -->
 <script src="${ctx}/assets/js/origin/app.js"></script>
 <script src="${ctx}/assets/js/origin/app.init.js"></script>
@@ -696,6 +693,46 @@
                 $thCb.prop("checked", false)
             }
         })
+
+        // 搜索表单
+        const $searchForm = $('#search-form')
+        // 搜索表单 - size
+        const $hiddenSize = $searchForm.find('[name=size]')
+        // 搜索表单 - page
+        const $hiddenPage = $searchForm.find('[name=page]')
+        // 搜索表单 - 搜索按钮
+        const $searchBtn = $searchForm.find('#search-btn')
+        $searchBtn.click(() => {
+            $hiddenPage.val(1)
+            $searchForm.submit()
+        })
+
+        // 监听size改变
+        const $selectSize = $('select[name=size]')
+        $selectSize.change(() => {
+            <#--window.location.href = '${ctx}/dictTypes/list?size=' + $size.val()-->
+            <#--    + "&keyword=" + $('[name=keyword]').val()-->
+            $hiddenSize.val($selectSize.val())
+            $hiddenPage.val(1)
+            $searchForm.submit()
+        })
+        $selectSize.val(${data.size})
+
+        // 处理分页信息
+        $('ul.pagination').bootstrapPaginator({
+            bootstrapMajorVersion: 3,
+            currentPage: ${data.page},
+            totalPages: ${data.pages},
+            onPageClicked: (e1, e2, type, page) => {
+                // 如果是当前页，直接返回
+                if (page === ${data.page}) return
+
+                $hiddenPage.val(page)
+                $searchForm.submit()
+            }
+        })
+
+
     })
 </script>
 </body>
