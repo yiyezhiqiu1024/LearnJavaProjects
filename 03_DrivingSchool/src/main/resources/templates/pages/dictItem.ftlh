@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="zh">
 <head>
-    <title>数据字典类型</title>
+    <title>数据字典条目</title>
     <#include "common/style.ftlh">
 </head>
 <body>
@@ -14,10 +14,8 @@
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
 <div id="main-wrapper">
-
     <#include "common/topbar.ftlh">
     <#include "common/left-sidebar.ftlh">
-
 
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
@@ -28,7 +26,7 @@
         <!-- ============================================================== -->
         <div class="row page-titles">
             <div class="col-12">
-                <h3 class="text-themecolor">数据字典类型</h3>
+                <h3 class="text-themecolor">数据字典条目</h3>
             </div>
         </div>
 
@@ -42,13 +40,15 @@
             <!-- ============================================================== -->
             <!-- Start Page Content -->
             <!-- ============================================================== -->
-
-            <form id="search-form" action="${ctx}/dictTypes/list">
+            <form id="search-form" action="${ctx}/dictItems/list">
                 <input type="hidden" name="page" value="${data.page}">
                 <input type="hidden" name="size" value="${data.size}">
                 <div class="row">
                     <div class="col-md-4 col-12 form-group">
-                        <input type="text" class="form-control" name="keyword" value="${data.keyword!}" placeholder="名称、值、简介">
+                        <input type="text"
+                               name="keyword"
+                               value="${data.keyword!}"
+                               class="form-control" placeholder="名称、值、简介">
                     </div>
                     <div class="col-md-4 col-6 form-group">
                         <button type="button" class="btn btn-secondary waves-effect waves-light mr-1">
@@ -99,7 +99,6 @@
                                         </td>
                                         <td>${item.name}</td>
                                         <td>${item.value}</td>
-                                        <td>${item.intro}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button class="btn btn-info btn-edit"><i class="ti-pencil-alt"></i></button>
@@ -129,7 +128,7 @@
 <!-- End Wrapper -->
 <!-- ============================================================== -->
 
-<#include "common/customizer.ftlh" >
+<#include "common/customizer.ftlh">
 
 <div id="modal-form"
      class="modal fade" style="display: none;">
@@ -187,6 +186,7 @@
 <#include "common/script.ftlh">
 
 <script>
+
     $(() => {
         // 变量、常量
         const $modal = $('#modal-form')
@@ -288,8 +288,6 @@
                 $searchForm.submit()
             }
         })
-
-
     })
 </script>
 </body>
