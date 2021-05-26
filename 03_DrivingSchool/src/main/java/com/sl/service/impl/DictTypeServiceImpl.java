@@ -1,6 +1,7 @@
 package com.sl.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sl.mapper.DictTypeMapper;
 import com.sl.pojo.po.DictType;
@@ -21,9 +22,10 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
 
     @Override
     public List<DictType> list(DictTypeQuery query) {
-
+        // 查询条件
         LambdaQueryWrapper<DictType> queryWrapper = new LambdaQueryWrapper<>();
 
+        // 关键字
         String keyword = query.getKeyword();
         if (!StringUtils.isEmpty(keyword)) {
             queryWrapper.like(DictType::getName, keyword).or()
@@ -31,6 +33,9 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
                     .like(DictType::getIntro, keyword);
         }
 
-        return mapper.selectList(queryWrapper);
+        // 分页对象
+        Page<DictType> page = new Page<>(query.getPage(), query.getSize());
+
+        return mapper.selectPage(page, queryWrapper).getRecords();
     }
 }
