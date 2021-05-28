@@ -20,7 +20,7 @@ public class DictTypeController {
     @Autowired
     private DictTypeService service;
 
-    @GetMapping("/list")
+    @GetMapping
     public Map<String, Object> list(DictTypeQuery query) {
         service.list(query);
         List<DictType> records = query.getRecords();
