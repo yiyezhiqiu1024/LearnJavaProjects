@@ -44,4 +44,16 @@ public class DictTypeController {
             throw new RuntimeException("删除失败");
         }
     }
+
+    @PostMapping("/save")
+    public Map<String, Object> save(DictType dictType) {
+        if (service.saveOrUpdate(dictType)) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("code", 0);
+            map.put("msg", "保存成功");
+            return map;
+        } else {
+            throw new RuntimeException("保存失败");
+        }
+    }
 }

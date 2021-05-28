@@ -30,6 +30,8 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
                     .like(DictType::getValue, keyword).or()
                     .like(DictType::getIntro, keyword);
         }
+        // 按照id降序
+        queryWrapper.orderByDesc(DictType::getId);
 
         // 分页对象
         Page<DictType> page = new Page<>(query.getPage(), query.getSize());
