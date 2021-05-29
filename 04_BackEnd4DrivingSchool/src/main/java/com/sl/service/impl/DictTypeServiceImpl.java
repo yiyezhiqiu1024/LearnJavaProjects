@@ -1,8 +1,8 @@
 package com.sl.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sl.common.enhance.MpPage;
+import com.sl.common.enhance.MpQueryWrapper;
 import com.sl.mapper.DictTypeMapper;
 import com.sl.pojo.po.DictType;
 import com.sl.pojo.query.DictTypeQuery;
@@ -18,18 +18,11 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
     @Override
     public void list(DictTypeQuery query) {
         // 查询条件
-        LambdaQueryWrapper<DictType> queryWrapper = new LambdaQueryWrapper<>();
-
+        MpQueryWrapper<DictType> queryWrapper = new MpQueryWrapper<>();
         // 关键字
-        String keyword = query.getKeyword();
-        if (!StringUtils.isEmpty(keyword)) {
-            queryWrapper.like(DictType::getName, keyword).or()
-                    .like(DictType::getValue, keyword).or()
-                    .like(DictType::getIntro, keyword);
-        }
+        queryWrapper.like(query.getKeyword(), DictType::getName, DictType::getValue, DictType::getIntro);
         // 按照id降序
         queryWrapper.orderByDesc(DictType::getId);
-
         // 分页查询
         baseMapper.selectPage(new MpPage<>(query), queryWrapper).updateQuery(query);
     }
