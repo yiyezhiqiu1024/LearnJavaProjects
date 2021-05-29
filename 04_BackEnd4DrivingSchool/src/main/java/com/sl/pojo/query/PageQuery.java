@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PageQuery<T> {
+public class PageQuery {
     private static final long DEFAULT_SIZE = 10;
 
     private long page;
@@ -23,7 +23,7 @@ public class PageQuery<T> {
     /**
      * 记录数据
      */
-    private List<T> records;
+    private List<?> records;
 
     public long getPage() {
         return Math.max(1, page);

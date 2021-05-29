@@ -1,13 +1,12 @@
 package com.sl.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sl.common.enhance.MpPage;
 import com.sl.mapper.DictTypeMapper;
 import com.sl.pojo.po.DictType;
 import com.sl.pojo.query.DictTypeQuery;
 import com.sl.service.DictTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -15,8 +14,6 @@ import org.springframework.util.StringUtils;
 @Service
 @Transactional
 public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> implements DictTypeService {
-    @Autowired
-    private DictTypeMapper mapper;
 
     @Override
     public void list(DictTypeQuery query) {
@@ -33,13 +30,7 @@ public class DictTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictType> i
         // 按照id降序
         queryWrapper.orderByDesc(DictType::getId);
 
-        // 分页对象
-        Page<DictType> page = new Page<>(query.getPage(), query.getSize());
-        // 查询
-        mapper.selectPage(page, queryWrapper);
-        // 填充query
-        query.setRecords(page.getRecords());
-        query.setTotal(page.getTotal());
-        query.setPages(page.getPages());
+        // 分页查询
+        baseMapper.selectPage(new MpPage<>(query), queryWrapper).updateQuery(query);
     }
 }
