@@ -1,18 +1,17 @@
 package com.sl.controller;
 
+import com.sl.common.util.Rs;
 import com.sl.pojo.po.DictType;
 import com.sl.pojo.query.DictTypeQuery;
+import com.sl.pojo.result.R;
 import com.sl.service.DictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,35 +24,24 @@ public class DictTypeController {
     @GetMapping
     public Map<String, Object> list(DictTypeQuery query) {
         service.list(query);
-        Map<String, Object> map = new HashMap<>();
-        map.put("code", 0);
-        map.put("msg", "请求成功");
-        map.put("count", query.getTotal());
-        map.put("data", query.getRecords());
-        return map;
+        return Rs.ok(query);
     }
 
     @PostMapping("/remove")
     public Map<String, Object> remove(String id) {
         if (service.removeByIds(Arrays.asList(id.split(",")))) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("code", 0);
-            map.put("msg", "删除成功");
-            return map;
+            return Rs.ok("删除成功");
         } else {
-            throw new RuntimeException("删除失败");
+            return Rs.error("删除失败");
         }
     }
 
     @PostMapping("/save")
-    public Map<String, Object> save(DictType dictType) {
+    public R save(DictType dictType) {
         if (service.saveOrUpdate(dictType)) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("code", 0);
-            map.put("msg", "保存成功");
-            return map;
+            return Rs.ok("保存成功");
         } else {
-            throw new RuntimeException("保存失败");
+            return Rs.error("保存失败");
         }
     }
 }
