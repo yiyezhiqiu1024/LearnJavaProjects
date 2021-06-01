@@ -1,5 +1,6 @@
 package com.sl.common.util;
 
+import com.sl.common.exception.CommonException;
 import com.sl.pojo.query.PageQuery;
 import com.sl.pojo.result.R;
 
@@ -28,9 +29,16 @@ public class Rs {
         return new R().setSuccess(false).setMsg(msg);
     }
 
-
-
-
-
+    public static R error(Throwable t) {
+        if (t instanceof CommonException) {
+            CommonException e = (CommonException) t;
+            R r = new R();
+            r.setCode(e.getCode());
+            r.setMsg(e.getMessage());
+            return r;
+        } else {
+            return error(t.getMessage());
+        }
+    }
 
 }

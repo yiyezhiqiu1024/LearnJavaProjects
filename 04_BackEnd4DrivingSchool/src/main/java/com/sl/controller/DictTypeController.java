@@ -1,5 +1,6 @@
 package com.sl.controller;
 
+import com.sl.common.exception.CommonException;
 import com.sl.common.util.Rs;
 import com.sl.pojo.po.DictType;
 import com.sl.pojo.query.DictTypeQuery;
@@ -32,7 +33,7 @@ public class DictTypeController {
         if (service.removeByIds(Arrays.asList(id.split(",")))) {
             return Rs.ok("删除成功");
         } else {
-            return Rs.error("删除失败");
+            throw new CommonException("删除失败");
         }
     }
 
@@ -41,7 +42,7 @@ public class DictTypeController {
         if (service.saveOrUpdate(dictType)) {
             return Rs.ok("保存成功");
         } else {
-            return Rs.error("保存失败");
+            throw new CommonException("保存失败");
         }
     }
 }
