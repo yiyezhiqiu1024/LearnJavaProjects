@@ -23,6 +23,6 @@ public class DictItemServiceImpl extends ServiceImpl<DictItemMapper, DictItem> i
         // 按照id降序
         queryWrapper.orderByDesc(DictItem::getId);
         // 分页查询
-        baseMapper.selectPage(new MpPage<>(query), queryWrapper).updateQuery(query);
+        baseMapper.selectPage(new MpPage<>(query), queryWrapper).updateQuery();
     }
 }

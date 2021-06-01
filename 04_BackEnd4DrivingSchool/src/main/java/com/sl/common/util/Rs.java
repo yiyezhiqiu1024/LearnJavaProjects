@@ -8,34 +8,31 @@ public class Rs {
     private static final String K_COUNT = "count";
 
     public static R ok() {
-        return new R().setSuccess(true);
+        return new R(true);
     }
 
     public static R ok(String msg) {
-        return ok().setMsg(msg);
+        return new R(msg);
     }
 
     public static R ok(Object data) {
-        return ok().setData(data);
+        return new R(data);
     }
 
     public static R ok(PageQuery query) {
-        R r = new R();
+        R r = new R(query.getRecords());
         r.put(K_COUNT, query.getTotal());
-        return r.setSuccess(true).setData(query.getRecords());
+        return r;
     }
 
     public static R error(String msg) {
-        return new R().setSuccess(false).setMsg(msg);
+        return new R(false, msg);
     }
 
     public static R error(Throwable t) {
         if (t instanceof CommonException) {
             CommonException e = (CommonException) t;
-            R r = new R();
-            r.setCode(e.getCode());
-            r.setMsg(e.getMessage());
-            return r;
+            return new R(e.getCode(), e.getMessage());
         } else {
             return error(t.getMessage());
         }

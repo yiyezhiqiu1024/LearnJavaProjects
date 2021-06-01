@@ -4,11 +4,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sl.pojo.query.PageQuery;
 
 public class MpPage<T> extends Page<T> {
+
+    private PageQuery query;
+
     public MpPage(PageQuery query) {
         super(query.getPage(), query.getSize());
+        this.query = query;
     }
 
-    public void updateQuery(PageQuery query) {
+    public void updateQuery() {
         query.setTotal(getTotal());
         query.setPages(getPages());
         query.setRecords(getRecords());
