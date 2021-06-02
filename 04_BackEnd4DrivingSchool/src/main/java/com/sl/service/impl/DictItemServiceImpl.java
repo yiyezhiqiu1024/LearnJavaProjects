@@ -20,6 +20,10 @@ public class DictItemServiceImpl extends ServiceImpl<DictItemMapper, DictItem> i
         MpQueryWrapper<DictItem> queryWrapper = new MpQueryWrapper<>();
         // 关键字
         queryWrapper.like(query.getKeyword(), DictItem::getName, DictItem::getValue);
+        Integer typeId = query.getTypeId();
+        if (typeId != null && typeId > 0) {
+            queryWrapper.eq(DictItem::getTypeId, typeId);
+        }
         // 按照id降序
         queryWrapper.orderByDesc(DictItem::getId);
         // 分页查询
