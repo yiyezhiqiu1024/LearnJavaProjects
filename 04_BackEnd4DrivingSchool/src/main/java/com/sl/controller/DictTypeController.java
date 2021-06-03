@@ -27,14 +27,12 @@ public class DictTypeController extends BaseController<DictType> {
     }
 
     @GetMapping
-    @Transactional(readOnly = true)
     public Map<String, Object> list(DictTypeQuery query) {
         service.list(query);
         return Rs.ok(query);
     }
 
     @GetMapping("/list")
-    @Transactional(readOnly = true)
     public R list() {
         return Rs.ok(service.list());
     }
