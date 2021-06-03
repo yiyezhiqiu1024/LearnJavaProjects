@@ -2,6 +2,7 @@ package com.sl.common.util;
 
 import com.sl.common.exception.CommonException;
 import com.sl.pojo.query.PageQuery;
+import com.sl.pojo.result.CodeMsg;
 import com.sl.pojo.result.R;
 
 public class Rs {
@@ -36,6 +37,14 @@ public class Rs {
         } else {
             return error(t.getMessage());
         }
+    }
+
+    public static R raise(String msg) throws CommonException {
+        throw new CommonException(msg);
+    }
+
+    public static R raise(CodeMsg codeMsg) throws CommonException {
+        throw new CommonException(codeMsg);
     }
 
 }
