@@ -1,18 +1,25 @@
 package com.sl.common.exception;
 
 import com.sl.common.util.Rs;
+import com.sl.pojo.result.R;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.nio.charset.StandardCharsets;
 
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
 public class CommonExceptionHandler {
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public R handle(Throwable t) {
+        log.error("handle", t);
+        return Rs.error(t);
+    }
+
+    /*
     @ExceptionHandler(Throwable.class)
     public void handle(Throwable t,
                        HttpServletRequest request,
@@ -26,4 +33,5 @@ public class CommonExceptionHandler {
 //        Debugs.run(t::printStackTrace);
         log.error(null, t);
     }
+     */
 }
