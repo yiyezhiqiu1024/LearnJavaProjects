@@ -3,11 +3,15 @@ package com.sl.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.sl.common.enhance.MpPage;
-import com.sl.common.enhance.MpQueryWrapper;
+import com.sl.common.enhance.MpLambdaQueryWrapper;
+import com.sl.common.mapStruct.MapStructs;
+import com.sl.common.util.Streams;
 import com.sl.mapper.PlateRegionMapper;
 import com.sl.pojo.po.PlateRegion;
-import com.sl.pojo.query.CityQuery;
-import com.sl.pojo.query.ProvinceQuery;
+import com.sl.pojo.vo.PageVo;
+import com.sl.pojo.vo.list.PlateRegionVo;
+import com.sl.pojo.vo.req.page.CityPageReqVo;
+import com.sl.pojo.vo.req.page.ProvincePageReqVo;
 import com.sl.service.PlateRegionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,36 +43,36 @@ public class PlateRegionServiceImpl extends ServiceImpl<PlateRegionMapper, Plate
 
     @Override
     @Transactional(readOnly = true)
-    public void provinces(ProvinceQuery query) {
+    public PageVo<PlateRegionVo> provinces(ProvincePageReqVo reqVo) {
         // 查询条件
-        MpQueryWrapper<PlateRegion> queryWrapper = new MpQueryWrapper<>();
+        MpLambdaQueryWrapper<PlateRegion> queryWrapper = new MpLambdaQueryWrapper<>();
         // 关键字
-        queryWrapper.like(query.getKeyword(), PlateRegion::getName, PlateRegion::getPlate, PlateRegion::getPinyin);
+        queryWrapper.like(reqVo.getKeyword(), PlateRegion::getName, PlateRegion::getPlate, PlateRegion::getPinyin);
         // 所有省份
         queryWrapper.eq(PlateRegion::getParentId, 0);
         // 按照id降序
         queryWrapper.orderByDesc(PlateRegion::getId);
         // 分页查询
-        baseMapper.selectPage(new MpPage<>(query), queryWrapper).updateQuery();
+        return baseMapper.selectPage(new MpPage<>(reqVo), queryWrapper).buildVo(MapStructs.INSTANCE::po2vo);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<PlateRegion> provinces() {
-        MpQueryWrapper<PlateRegion> queryWrapper = new MpQueryWrapper<>();
+    public List<PlateRegionVo> provinces() {
+        MpLambdaQueryWrapper<PlateRegion> queryWrapper = new MpLambdaQueryWrapper<>();
         queryWrapper.eq(PlateRegion::getParentId, 0);
         queryWrapper.orderByAsc(PlateRegion::getPinyin);
-        return baseMapper.selectList(queryWrapper);
+        return Streams.map(baseMapper.selectList(queryWrapper), MapStructs.INSTANCE::po2vo);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public void cities(CityQuery query) {
+    public PageVo<PlateRegionVo> cities(CityPageReqVo reqVo) {
         // 查询条件
-        MpQueryWrapper<PlateRegion> queryWrapper = new MpQueryWrapper<>();
+        MpLambdaQueryWrapper<PlateRegion> queryWrapper = new MpLambdaQueryWrapper<>();
         // 关键字
-        queryWrapper.like(query.getKeyword(), PlateRegion::getName, PlateRegion::getPlate, PlateRegion::getPinyin);
-        Integer parentId = query.getParentId();
+        queryWrapper.like(reqVo.getKeyword(), PlateRegion::getName, PlateRegion::getPlate, PlateRegion::getPinyin);
+        Integer parentId = reqVo.getParentId();
         if (parentId != null && parentId > 0) { // parentId下面的所有城市
             queryWrapper.eq(PlateRegion::getParentId, parentId);
         } else { // 所有城市
@@ -77,6 +81,6 @@ public class PlateRegionServiceImpl extends ServiceImpl<PlateRegionMapper, Plate
         // 按照id降序
         queryWrapper.orderByDesc(PlateRegion::getId);
         // 分页查询
-        baseMapper.selectPage(new MpPage<>(query), queryWrapper).updateQuery();
+        return baseMapper.selectPage(new MpPage<>(reqVo), queryWrapper).buildVo(MapStructs.INSTANCE::po2vo);
     }
 }

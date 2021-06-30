@@ -2,9 +2,10 @@ package com.sl.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sl.pojo.po.DictItem;
-import com.sl.pojo.query.DictItemQuery;
+import com.sl.pojo.vo.PageVo;
+import com.sl.pojo.vo.list.DictItemVo;
+import com.sl.pojo.vo.req.page.DictItemPageReqVo;
 
 public interface DictItemService extends IService<DictItem> {
-
-    void list(DictItemQuery query);
+    PageVo<DictItemVo> list(DictItemPageReqVo pageReqVo);
 }

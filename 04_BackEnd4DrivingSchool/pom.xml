@@ -19,6 +19,7 @@
         <druid.version>1.2.1</druid.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
         <tinypinyin.version>2.0.3</tinypinyin.version>
+        <mapStruct.version>1.4.1.Final</mapStruct.version>
     </properties>
 
     <dependencies>
@@ -26,6 +27,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 对象转换 -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapStruct.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapStruct.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- AOP -->

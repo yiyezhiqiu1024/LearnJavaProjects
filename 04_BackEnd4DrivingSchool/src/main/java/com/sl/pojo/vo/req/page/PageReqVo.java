@@ -1,29 +1,13 @@
-package com.sl.pojo.query;
+package com.sl.pojo.vo.req.page;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class PageQuery {
+public class PageReqVo {
     private static final long DEFAULT_SIZE = 10;
 
     private long page;
     private long size;
-
-    /**
-     * 总记录数
-     */
-    private long total;
-    /**
-     * 总页数
-     */
-    private long pages;
-
-    /**
-     * 记录数据
-     */
-    private List<?> records;
 
     public long getPage() {
         return Math.max(1, page);

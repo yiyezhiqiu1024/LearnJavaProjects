@@ -1,33 +1,35 @@
 package com.sl.controller;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sl.common.util.Rs;
+import com.sl.common.util.JsonVos;
 import com.sl.pojo.result.CodeMsg;
-import com.sl.pojo.result.R;
+import com.sl.pojo.vo.JsonVo;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.function.Function;
 
-public abstract class BaseController<T> {
+public abstract class BaseController<Po, ReqVo> {
 
-    protected abstract IService<T> getService();
+    protected abstract IService<Po> getService();
+    protected abstract Function<ReqVo, Po> getFunction();
 
     @PostMapping("/remove")
-    public Map<String, Object> remove(String id) {
+    public JsonVo remove(String id) {
         if (getService().removeByIds(Arrays.asList(id.split(",")))) {
-            return Rs.ok(CodeMsg.REMOVE_OK);
+            return JsonVos.ok(CodeMsg.REMOVE_OK);
         } else {
-            return Rs.raise(CodeMsg.REMOVE_ERROR);
+            return JsonVos.raise(CodeMsg.REMOVE_ERROR);
         }
     }
 
     @PostMapping("/save")
-    public R save(T t) {
-        if (getService().saveOrUpdate(t)) {
-            return Rs.ok(CodeMsg.SAVE_OK);
+    public JsonVo save(ReqVo reqVo) {
+        Po po = getFunction().apply(reqVo);
+        if (getService().saveOrUpdate(po)) {
+            return JsonVos.ok(CodeMsg.SAVE_OK);
         } else {
-            return Rs.raise(CodeMsg.SAVE_ERROR);
+            return JsonVos.raise(CodeMsg.SAVE_ERROR);
         }
     }
 }
