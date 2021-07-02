@@ -21,12 +21,13 @@ public class JsonVos {
     }
 
     public static <T> DataJsonVo<T> ok(T data) {
-        return new DataJsonVo(data);
+        return new DataJsonVo<>(data);
     }
 
     public static <T> PageJsonVo<T> ok(PageVo<T> pageVo) {
         PageJsonVo<T> pageJsonVo = new PageJsonVo<>();
         pageJsonVo.setCount(pageVo.getTotal());
+        pageJsonVo.setPages(pageVo.getPages());
         pageJsonVo.setData(pageVo.getRecords());
         return pageJsonVo;
     }

@@ -1,0 +1,68 @@
+package com.sl.common.cfg;
+
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
+import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@Configuration
+public class SwaggerCfg implements InitializingBean {
+    @Autowired
+    private Environment environment;
+    private boolean enable;
+
+    @Bean
+    public Docket metadataDocket() {
+        return groupDocket(
+                "元数据",
+                "元数据模块文档",
+                "数据字典条目，数据字典类型, 省份，城市",
+                "/(dict.*|plate.*)");
+    }
+
+    private Docket groupDocket(String group, String title, String description, String regex) {
+        return basicDocket()
+                .groupName(group)
+                .apiInfo(apiInfo(title, description))
+                .select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+                .paths(PathSelectors.regex(regex))
+                .build();
+    }
+
+    private Docket basicDocket() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .ignoredParameterTypes(
+                        HttpSession.class,
+                        HttpServletRequest.class,
+                        HttpServletResponse.class
+                )
+                .enable(enable);
+    }
+
+    private ApiInfo apiInfo(String title, String description) {
+        return new ApiInfoBuilder()
+                .title(title)
+                .description(description)
+                .version("1.0.0")
+                .build();
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        enable = environment.acceptsProfiles(Profiles.of("dev", "test"));
+    }
+}

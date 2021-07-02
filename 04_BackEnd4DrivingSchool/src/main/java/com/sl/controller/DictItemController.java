@@ -9,6 +9,8 @@ import com.sl.pojo.vo.list.DictItemVo;
 import com.sl.pojo.vo.req.page.DictItemPageReqVo;
 import com.sl.pojo.vo.req.save.DictItemReqVo;
 import com.sl.service.DictItemService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import java.util.function.Function;
 
 @RestController
 @RequestMapping("/dictItems")
+@Api(tags = "数据字典条目")
 public class DictItemController extends BaseController<DictItem, DictItemReqVo> {
 
     @Autowired
@@ -34,6 +37,7 @@ public class DictItemController extends BaseController<DictItem, DictItemReqVo> 
     }
 
     @GetMapping
+    @ApiOperation("分页查询")
     public PageJsonVo<DictItemVo> list(DictItemPageReqVo pageReqVo) {
         return JsonVos.ok(service.list(pageReqVo));
     }

@@ -1,20 +1,28 @@
 package com.sl.pojo.vo.list;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
+@ApiModel("数据字典条目")
 public class DictItemVo {
-    // 主键
+    @ApiModelProperty("id")
     private Integer id;
-    // 名称
+
+    @ApiModelProperty("名称")
     private String name;
-    // 值
+
+    @ApiModelProperty("值")
     private String value;
-    // 排列顺序，默认0。值越大，就排在越前面
+
+    @ApiModelProperty("排列顺序，默认0【值越大，就排在越前面】")
     private Integer sn;
-    // 是否禁用 0代表不禁用（启用），1代表禁用
+
+    @ApiModelProperty("是否禁用【0代表不禁用（启用），1代表禁用】")
     private Short disabled;
-    // 所属的类型
+
+    @ApiModelProperty("数据字典类型的id")
     private Integer typeId;
 }
 

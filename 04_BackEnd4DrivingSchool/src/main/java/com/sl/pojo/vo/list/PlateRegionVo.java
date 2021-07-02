@@ -1,17 +1,22 @@
 package com.sl.pojo.vo.list;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
+@ApiModel("区域")
 public class PlateRegionVo {
-    // 主键
+    @ApiModelProperty("id")
     private Integer id;
-    // 名称
+
+    @ApiModelProperty("名称")
     private String name;
-    // 车牌
+
+    @ApiModelProperty("车牌")
     private String plate;
-    // 拼音
-    private String pinyin;
+
+    @ApiModelProperty("父区域的id")
     private Integer parentId;
 }
 

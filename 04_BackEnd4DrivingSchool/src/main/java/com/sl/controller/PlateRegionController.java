@@ -11,6 +11,8 @@ import com.sl.pojo.vo.req.page.CityPageReqVo;
 import com.sl.pojo.vo.req.page.ProvincePageReqVo;
 import com.sl.pojo.vo.req.save.PlateRegionReqVo;
 import com.sl.service.PlateRegionService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import java.util.function.Function;
 
 @RestController
 @RequestMapping("/plateRegions")
+@Api(tags = "省份/城市")
 public class PlateRegionController extends BaseController<PlateRegion, PlateRegionReqVo> {
 
     @Autowired
@@ -37,16 +40,19 @@ public class PlateRegionController extends BaseController<PlateRegion, PlateRegi
     }
 
     @GetMapping("provinces")
+    @ApiOperation("分页查询省份")
     public PageJsonVo<PlateRegionVo> provinces(ProvincePageReqVo reqVo) {
         return JsonVos.ok(service.provinces(reqVo));
     }
 
     @GetMapping("province/list")
+    @ApiOperation("查询所有省份")
     public DataJsonVo<List<PlateRegionVo>> listProvinces() {
         return JsonVos.ok(service.provinces());
     }
 
     @GetMapping("cities")
+    @ApiOperation("分页查询城市")
     public PageJsonVo<PlateRegionVo> cities(CityPageReqVo reqVo) {
         return JsonVos.ok(service.cities(reqVo));
     }

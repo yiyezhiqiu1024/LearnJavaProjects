@@ -1,16 +1,23 @@
 package com.sl.pojo.vo.list;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
+@ApiModel("数据字典类型")
 public class DictTypeVo {
-    // 主键
+
+    @ApiModelProperty("id")
     private Integer id;
-    // 名称
+
+    @ApiModelProperty("名称")
     private String name;
-    // 值
+
+    @ApiModelProperty("值")
     private String value;
-    // 简介
+
+    @ApiModelProperty("简介")
     private String intro;
 }
 
