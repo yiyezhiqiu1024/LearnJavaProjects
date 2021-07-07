@@ -10,6 +10,7 @@ import com.sl.mapper.PlateRegionMapper;
 import com.sl.pojo.po.PlateRegion;
 import com.sl.pojo.vo.PageVo;
 import com.sl.pojo.vo.list.PlateRegionVo;
+import com.sl.pojo.vo.list.ProvinceVo;
 import com.sl.pojo.vo.req.page.CityPageReqVo;
 import com.sl.pojo.vo.req.page.ProvincePageReqVo;
 import com.sl.service.PlateRegionService;
@@ -82,5 +83,11 @@ public class PlateRegionServiceImpl extends ServiceImpl<PlateRegionMapper, Plate
         queryWrapper.orderByDesc(PlateRegion::getId);
         // 分页查询
         return baseMapper.selectPage(new MpPage<>(reqVo), queryWrapper).buildVo(MapStructs.INSTANCE::po2vo);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProvinceVo> regions() {
+        return baseMapper.selectRegions();
     }
 }

@@ -27,10 +27,19 @@ public class SwaggerCfg implements InitializingBean {
     @Bean
     public Docket metadataDocket() {
         return groupDocket(
-                "元数据",
+                "02_元数据",
                 "元数据模块文档",
                 "数据字典条目，数据字典类型, 省份，城市",
                 "/(dict.*|plate.*)");
+    }
+
+    @Bean
+    public Docket examDocket() {
+        return groupDocket(
+                "03_考试",
+                "考试模块文档",
+                "考场，科1科4，科2科3",
+                "/exam.*");
     }
 
     private Docket groupDocket(String group, String title, String description, String regex) {

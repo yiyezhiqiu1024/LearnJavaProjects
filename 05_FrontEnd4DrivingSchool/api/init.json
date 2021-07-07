@@ -65,7 +65,7 @@
           "child": [
             {
               "title": "考场",
-              "href": "page/exam/examPlace/list.html",
+              "href": "page/exam/place/list.html",
               "icon": "fa fa-car"
             },
             {

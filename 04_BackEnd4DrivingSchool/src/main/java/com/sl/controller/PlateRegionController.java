@@ -7,6 +7,7 @@ import com.sl.pojo.po.PlateRegion;
 import com.sl.pojo.vo.DataJsonVo;
 import com.sl.pojo.vo.PageJsonVo;
 import com.sl.pojo.vo.list.PlateRegionVo;
+import com.sl.pojo.vo.list.ProvinceVo;
 import com.sl.pojo.vo.req.page.CityPageReqVo;
 import com.sl.pojo.vo.req.page.ProvincePageReqVo;
 import com.sl.pojo.vo.req.save.PlateRegionReqVo;
@@ -55,5 +56,11 @@ public class PlateRegionController extends BaseController<PlateRegion, PlateRegi
     @ApiOperation("分页查询城市")
     public PageJsonVo<PlateRegionVo> cities(CityPageReqVo reqVo) {
         return JsonVos.ok(service.cities(reqVo));
+    }
+
+    @GetMapping("/regions")
+    @ApiOperation("查询所有的区域（省份、城市）")
+    public DataJsonVo<List<ProvinceVo>> regions() {
+        return JsonVos.ok(service.regions());
     }
 }
