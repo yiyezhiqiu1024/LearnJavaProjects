@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @ApiModel("数据字典条目")
 public class DictItemVo {
-    @ApiModelProperty("id")
+    @ApiModelProperty("主键")
     private Integer id;
 
     @ApiModelProperty("名称")

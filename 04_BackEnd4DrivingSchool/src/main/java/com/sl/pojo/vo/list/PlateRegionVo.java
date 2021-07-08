@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @ApiModel("区域")
 public class PlateRegionVo {
-    @ApiModelProperty("id")
+    @ApiModelProperty("主键")
     private Integer id;
 
     @ApiModelProperty("名称")

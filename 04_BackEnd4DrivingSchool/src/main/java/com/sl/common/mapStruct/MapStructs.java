@@ -18,9 +18,11 @@ public interface MapStructs {
      DictType reqVo2po(DictTypeReqVo reqVo);
      PlateRegion reqVo2po(PlateRegionReqVo reqVo);
      ExamPlace reqVo2po(ExamPlaceReqVo reqVo);
+     ExamPlaceCourse reqVo2po(ExamPlaceCourseReqVo reqVo);
 
      DictItemVo po2vo(DictItem po);
      DictTypeVo po2vo(DictType po);
      PlateRegionVo po2vo(PlateRegion po);
      ExamPlaceVo po2vo(ExamPlace po);
+     ExamPlaceCourseVo po2vo(ExamPlaceCourse po);
 }

@@ -6,6 +6,9 @@ import com.sl.pojo.vo.PageVo;
 import com.sl.pojo.vo.list.ExamPlaceVo;
 import com.sl.pojo.vo.req.page.ExamPlacePageReqVo;
 
+import java.util.List;
+
 public interface ExamPlaceService extends IService<ExamPlace> {
     PageVo<ExamPlaceVo> list(ExamPlacePageReqVo reqVo);
+    List<ExamPlaceVo> regionExamPlaces();
 }

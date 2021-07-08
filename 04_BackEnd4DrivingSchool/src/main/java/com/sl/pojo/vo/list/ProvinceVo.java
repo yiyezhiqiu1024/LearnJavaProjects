@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @ApiModel("省份")
 public class ProvinceVo {
-    @ApiModelProperty("id")
+    @ApiModelProperty("主键")
     private Integer id;
 
     @ApiModelProperty("名称")

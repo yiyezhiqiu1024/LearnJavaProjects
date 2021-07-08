@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @ApiModel("城市")
 public class CityVo {
-    @ApiModelProperty("id")
+    @ApiModelProperty("主键")
     private Integer id;
 
     @ApiModelProperty("名称")

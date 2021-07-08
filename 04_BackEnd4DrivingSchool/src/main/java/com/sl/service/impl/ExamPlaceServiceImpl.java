@@ -13,6 +13,8 @@ import com.sl.service.ExamPlaceService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ExamPlaceServiceImpl extends ServiceImpl<ExamPlaceMapper, ExamPlace> implements ExamPlaceService {
@@ -37,5 +39,11 @@ public class ExamPlaceServiceImpl extends ServiceImpl<ExamPlaceMapper, ExamPlace
         queryWrapper.orderByDesc(ExamPlace::getId);
         // 分页查询
         return baseMapper.selectPage(new MpPage<>(reqVo), queryWrapper).buildVo(MapStructs.INSTANCE::po2vo);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ExamPlaceVo> regionExamPlaces() {
+        return baseMapper.selectRegionExamPlaces();
     }
 }
