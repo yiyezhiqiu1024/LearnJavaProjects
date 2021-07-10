@@ -25,6 +25,15 @@ public class SwaggerCfg implements InitializingBean {
     private boolean enable;
 
     @Bean
+    public Docket sysDocket() {
+        return groupDocket(
+                "01_系统",
+                "系统模块文档",
+                "用户，角色，资源",
+                "/sys.*");
+    }
+
+    @Bean
     public Docket metadataDocket() {
         return groupDocket(
                 "02_元数据",
