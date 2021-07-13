@@ -24,6 +24,8 @@ public class SysUserReqVo {
     @ApiModelProperty("账号的状态【0是正常，1是锁定，默认0】")
     private Short status;
 
+    @ApiModelProperty("角色id【多个id之间用逗号，隔开】")
+    private String roleIds;
 }
 
 
