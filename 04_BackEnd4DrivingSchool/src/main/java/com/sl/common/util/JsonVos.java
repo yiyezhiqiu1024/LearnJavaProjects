@@ -73,11 +73,11 @@ public class JsonVos {
         }
     }
 
-    public static JsonVo raise(String msg) throws CommonException {
+    public static <T> T raise(String msg) throws CommonException {
         throw new CommonException(msg);
     }
 
-    public static JsonVo raise(CodeMsg codeMsg) throws CommonException {
+    public static <T> T raise(CodeMsg codeMsg) throws CommonException {
         throw new CommonException(codeMsg);
     }
 

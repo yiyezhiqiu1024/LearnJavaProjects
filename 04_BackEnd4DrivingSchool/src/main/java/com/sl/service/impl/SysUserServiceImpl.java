@@ -4,12 +4,17 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sl.common.enhance.MpLambdaQueryWrapper;
 import com.sl.common.enhance.MpPage;
 import com.sl.common.mapStruct.MapStructs;
+import com.sl.common.util.Constants;
+import com.sl.common.util.JsonVos;
 import com.sl.common.util.Strings;
 import com.sl.mapper.SysUserMapper;
 import com.sl.pojo.po.SysUser;
 import com.sl.pojo.po.SysUserRole;
+import com.sl.pojo.result.CodeMsg;
+import com.sl.pojo.vo.LoginVo;
 import com.sl.pojo.vo.PageVo;
 import com.sl.pojo.vo.list.SysUserVo;
+import com.sl.pojo.vo.req.LoginReqVo;
 import com.sl.pojo.vo.req.page.SysUserPageReqVo;
 import com.sl.pojo.vo.req.save.SysUserReqVo;
 import com.sl.service.SysUserRoleService;
@@ -19,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +33,35 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Autowired
     private SysUserRoleService userRoleService;
+
+    @Override
+    public LoginVo login(LoginReqVo reqVo) {
+        // 根据用户名查询用户
+        MpLambdaQueryWrapper<SysUser> wrapper = new MpLambdaQueryWrapper<>();
+        wrapper.eq(SysUser::getUsername, reqVo.getUsername());
+        SysUser po = baseMapper.selectOne(wrapper);
+
+        // 用户名不存在
+        if (po == null) {
+            return JsonVos.raise(CodeMsg.WRONG_USERNAME);
+        }
+
+        // 密码不正确
+        if (!po.getPassword().equals(reqVo.getPassword())) {
+            return JsonVos.raise(CodeMsg.WRONG_PASSWORD);
+        }
+
+        // 账号锁定
+        if (po.getStatus() == Constants.SysUserStatus.LOCKED) {
+            return JsonVos.raise(CodeMsg.USER_LOCKED);
+        }
+
+        // 更新登录时间
+        po.setLoginTime(new Date());
+        baseMapper.updateById(po);
+
+        return MapStructs.INSTANCE.po2loginVo(po);
+    }
 
     @Override
     @Transactional(readOnly = true)

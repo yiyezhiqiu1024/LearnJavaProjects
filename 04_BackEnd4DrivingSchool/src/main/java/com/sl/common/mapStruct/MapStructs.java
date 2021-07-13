@@ -1,6 +1,7 @@
 package com.sl.common.mapStruct;
 
 import com.sl.pojo.po.*;
+import com.sl.pojo.vo.LoginVo;
 import com.sl.pojo.vo.list.*;
 import com.sl.pojo.vo.req.save.*;
 import org.mapstruct.Mapper;
@@ -36,4 +37,5 @@ public interface MapStructs {
              qualifiedBy = MapStructFormatter.Date2Millis.class
      )
      SysUserVo po2vo(SysUser po);
+     LoginVo po2loginVo(SysUser po);
 }
