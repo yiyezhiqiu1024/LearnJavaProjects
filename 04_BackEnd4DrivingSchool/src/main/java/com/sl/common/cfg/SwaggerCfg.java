@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.RequestParameterBuilder;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ParameterType;
+import springfox.documentation.service.RequestParameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Configuration
 public class SwaggerCfg implements InitializingBean {
@@ -62,7 +66,13 @@ public class SwaggerCfg implements InitializingBean {
     }
 
     private Docket basicDocket() {
+        RequestParameter token = new RequestParameterBuilder()
+                .name("Token")
+                .description("用户登录令牌")
+                .in(ParameterType.HEADER)
+                .build();
         return new Docket(DocumentationType.SWAGGER_2)
+                .globalRequestParameters(List.of(token))
                 .ignoredParameterTypes(
                         HttpSession.class,
                         HttpServletRequest.class,

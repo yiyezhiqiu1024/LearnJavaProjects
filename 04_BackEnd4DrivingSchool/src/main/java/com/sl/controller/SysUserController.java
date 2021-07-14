@@ -1,6 +1,7 @@
 package com.sl.controller;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sl.common.cache.Caches;
 import com.sl.common.mapStruct.MapStructs;
 import com.sl.common.util.JsonVos;
 import com.sl.pojo.po.SysUser;
@@ -12,16 +13,13 @@ import com.sl.pojo.vo.PageJsonVo;
 import com.sl.pojo.vo.list.SysUserVo;
 import com.sl.pojo.vo.req.LoginReqVo;
 import com.sl.pojo.vo.req.page.SysUserPageReqVo;
-import com.sl.pojo.vo.req.save. SysUserReqVo;
+import com.sl.pojo.vo.req.save.SysUserReqVo;
 import com.sl.service.SysUserService;
 import com.wf.captcha.utils.CaptchaUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,6 +57,13 @@ public class SysUserController extends BaseController<SysUser, SysUserReqVo> {
             return JsonVos.ok(service.login(reqVo));
         }
         return JsonVos.raise(CodeMsg.WRONG_CAPTCHA);
+    }
+
+    @PostMapping("/logout")
+    @ApiOperation("退出登录")
+    public JsonVo logout(@RequestHeader("Token") String token) {
+        Caches.removeToken(token);
+        return JsonVos.ok();
     }
 
     @GetMapping

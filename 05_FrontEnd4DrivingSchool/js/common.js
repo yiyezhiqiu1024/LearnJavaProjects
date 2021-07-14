@@ -16,6 +16,18 @@ class Commons {
         const newObj = (obj.constructor === Array) ? [] : {}
         return $.extend(true, newObj, obj)
     }
+
+    static _addTokenHeader(cfg) {
+        // 取出token
+        const token = Datas.get(DataKey.USER, DataKey.TOKEN)
+        if (token) {
+            if (!cfg.headers) {
+                cfg.headers = {}
+            }
+            // 将token放到请求头
+            cfg.headers[DataKey.TOKEN_HEAD] = token
+        }
+    }
 }
 
 /********************* 数据 ***********************/
@@ -115,6 +127,8 @@ class Ajaxs {
 
     static ajax(cfg) {
         cfg.url = Commons.url(cfg.uri)
+        // ajax请求头加上token
+        Commons._addTokenHeader(cfg)
         $.ajax(cfg)
     }
 }
@@ -507,6 +521,8 @@ class Table extends Module {
         cfg.url = Commons.url(this._cfg.uri)
         $.extend(cfg, this._cfg)
         cfg.elem = cfg.selector
+        // form标签请求头添加token
+        Commons._addTokenHeader(cfg)
         this._innerTable = this._layuiTable().render(cfg)
         this._cfg = cfg
     }

@@ -16,4 +16,7 @@ public class LoginVo {
 
     @ApiModelProperty("用户名")
     private String username;
+
+    @ApiModelProperty("登录令牌")
+    private String token;
 }

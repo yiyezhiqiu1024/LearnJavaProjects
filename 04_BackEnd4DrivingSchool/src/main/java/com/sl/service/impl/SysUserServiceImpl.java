@@ -1,6 +1,7 @@
 package com.sl.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sl.common.cache.Caches;
 import com.sl.common.enhance.MpLambdaQueryWrapper;
 import com.sl.common.enhance.MpPage;
 import com.sl.common.mapStruct.MapStructs;
@@ -26,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -60,7 +62,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         po.setLoginTime(new Date());
         baseMapper.updateById(po);
 
-        return MapStructs.INSTANCE.po2loginVo(po);
+        // 生成Token, 发送Token给用户
+        String token = UUID.randomUUID().toString();
+        // 存储token到缓存中
+        Caches.putToken(token, po);
+
+        // 返回给客户端的具体数据
+        LoginVo vo = MapStructs.INSTANCE.po2loginVo(po);
+        vo.setToken(token);
+        return vo;
     }
 
     @Override
