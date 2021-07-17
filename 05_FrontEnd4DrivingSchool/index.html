@@ -126,7 +126,7 @@
                 uri: 'sysUsers/logout',
                 success: () => {
                     // 清除客户端
-                    Datas.remove('user')
+                    Datas.remove(DataKey.USER)
                     // 提示
                     Layers.msgSuccess('退出登录成功', function () {
                         window.location = 'page/login.html';
@@ -140,5 +140,6 @@
         })
     })
 </script>
+
 </body>
 </html>
