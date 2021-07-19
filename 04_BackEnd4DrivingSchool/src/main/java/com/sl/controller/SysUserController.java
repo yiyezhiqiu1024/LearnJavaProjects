@@ -3,6 +3,7 @@ package com.sl.controller;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sl.common.cache.Caches;
 import com.sl.common.mapStruct.MapStructs;
+import com.sl.common.shiro.TokenFilter;
 import com.sl.common.util.JsonVos;
 import com.sl.pojo.po.SysUser;
 import com.sl.pojo.result.CodeMsg;
@@ -61,7 +62,7 @@ public class SysUserController extends BaseController<SysUser, SysUserReqVo> {
 
     @PostMapping("/logout")
     @ApiOperation("退出登录")
-    public JsonVo logout(@RequestHeader("Token") String token) {
+    public JsonVo logout(@RequestHeader(TokenFilter.HEADER_TOKEN) String token) {
         Caches.removeToken(token);
         return JsonVos.ok();
     }

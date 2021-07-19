@@ -28,8 +28,10 @@
     <cache alias="token" uses-template="common">
         <expiry>
             <!-- time to idle -->
-            <tti unit="days">7</tti>
-            <!-- <tti unit="seconds">5</tti> -->
+            <!-- 7天后过期 -->
+            <!-- <tti unit="days">7</tti> -->
+            <!-- 5秒后过期 -->
+             <tti unit="seconds">5</tti>
         </expiry>
     </cache>
 
