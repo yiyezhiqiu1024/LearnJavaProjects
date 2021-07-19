@@ -1,6 +1,7 @@
 package com.sl.common.shiro;
 
 import com.sl.common.prop.DsProperties;
+import com.sl.filter.ErrorFilter;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -44,6 +45,8 @@ public class ShiroCfg {
         // swagger
         urlMap.put("/swagger*/**", "anon");
         urlMap.put("/v2/api-docs/**", "anon");
+        // 全局Filter的异常处理
+        urlMap.put(ErrorFilter.ERROR_URI, "anon");
         // 其他
         urlMap.put("/**", "token");
         filterBean.setFilterChainDefinitionMap(urlMap);

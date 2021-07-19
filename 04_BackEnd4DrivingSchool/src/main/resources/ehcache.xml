@@ -29,9 +29,9 @@
         <expiry>
             <!-- time to idle -->
             <!-- 7天后过期 -->
-            <!-- <tti unit="days">7</tti> -->
+            <tti unit="days">7</tti>
             <!-- 5秒后过期 -->
-             <tti unit="seconds">5</tti>
+            <!-- <tti unit="seconds">5</tti> -->
         </expiry>
     </cache>
 

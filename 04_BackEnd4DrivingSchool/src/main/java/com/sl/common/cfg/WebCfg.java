@@ -1,10 +1,16 @@
 package com.sl.common.cfg;
 
 import com.sl.common.prop.DsProperties;
+import com.sl.filter.ErrorFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.servlet.Filter;
 
 @Configuration
 public class WebCfg implements WebMvcConfigurer {
@@ -21,5 +27,16 @@ public class WebCfg implements WebMvcConfigurer {
                 .allowCredentials(true)
                 // 哪些HTTP方法允许跨域访问
                 .allowedMethods("GET", "POST");
+    }
+
+    @Bean
+    public FilterRegistrationBean<Filter> filterRegistrationBean() {
+        FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
+        // 设置Filter
+        bean.setFilter(new ErrorFilter());
+        bean.addUrlPatterns("/*");
+        // 最高权限
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
     }
 }

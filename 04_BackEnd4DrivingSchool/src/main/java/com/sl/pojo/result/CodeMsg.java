@@ -22,7 +22,8 @@ public enum CodeMsg {
 
 
     NO_TOKEN(60001, "没有Token，请登录"),
-    TOKEN_EXPIRED(60002, "Token过期，请重新登录");
+    TOKEN_EXPIRED(60002, "Token过期，请重新登录"),
+    NO_PERMISSION(60003, "没有相关的操作权限");
 
     private final int code;
     private final String msg;
